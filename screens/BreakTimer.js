@@ -70,7 +70,7 @@ const BreakTimer = () => {
         {' '}
         Meanwhile check out some music we have for you!{' '}
       </Text>
-      <CustomButton text="To music page" onPress={onselected} />
+      <CustomButton text="To Spotify" onPress={onselected} />
     </View>
   );
 };
