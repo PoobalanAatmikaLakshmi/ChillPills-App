@@ -11,3 +11,9 @@ Native React (Frontend)
 Firebase (Backend)
 Node.js (Backend)
 Git 
+# Set-Up 
+1) download dependencies 
+- After downloading zip file cd to ios folder and run pod install 
+- Run pod update 
+2) download xcode and iphone simulator (xcode preferences --> components)
+3) run npx react-native run-ios
