@@ -19,6 +19,7 @@ const SignUpScreen = () => {
 
   const onRegisterPressed = async () => {
     //console.warn("Register");
+    //will work
 
     await firebase
       .auth()
