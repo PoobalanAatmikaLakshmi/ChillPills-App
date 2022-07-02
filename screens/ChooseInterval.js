@@ -19,7 +19,7 @@ const ChooseInterval = () => {
   const navigation = useNavigation();
   const onChosen = () => {
     navigation.navigate('Drawer', {screen: 'Home'});
-    //console.warn("Go to Home Page");
+    //console.warn("Go to Home Page")ss;
   };
   return (
     <View style={styles.root}>
