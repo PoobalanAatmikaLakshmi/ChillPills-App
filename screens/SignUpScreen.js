@@ -14,7 +14,6 @@ const SignUpScreen = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [passwordRepeat, setPasswordRepeat] = useState('');
-
   const navigation = useNavigation();
 
   const onRegisterPressed = async () => {
@@ -37,10 +36,7 @@ const SignUpScreen = () => {
           .doc(uid)
           .set(data)
           .then(() => {
-            navigation.navigate('Choose A Pet!', {
-              id: uid,
-              //petimage,
-            });
+            navigation.navigate('Login');
           })
           .catch(error => {
             alert(error);

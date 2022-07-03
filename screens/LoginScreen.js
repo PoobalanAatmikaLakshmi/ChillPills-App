@@ -46,10 +46,16 @@ const LoginScreen = () => {
               return;
             }
             const user = firestoreDocument.data();
-            navigation.navigate('Drawer', {
-              screen: 'Home',
-              params: {data: user},
-            });
+            if (user.petimage === 'uninitialized') {
+              navigation.navigate('Choose A Pet!', {
+                id: uid,
+              });
+            } else {
+              navigation.navigate('Drawer', {
+                screen: 'Home',
+                params: {sentid: uid},
+              });
+            }
           })
           .catch(error => {
             alert(error);
@@ -59,7 +65,6 @@ const LoginScreen = () => {
         alert(error);
       });
   };
-
   const onForgetPressed = () => {
     //console.warn("Forgot Password");
     navigation.navigate('ResetPasswordScreen');

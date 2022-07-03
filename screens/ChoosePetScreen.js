@@ -21,16 +21,47 @@ import {useRoute} from '@react-navigation/native';
 const ChoosePetScreen = () => {
   const {height} = useWindowDimensions();
   const navigation = useNavigation();
-
-  const onChosen = () => {
-    
+  const route = useRoute();
+  const sentid = route.params.id;
+  const onChosen1 = () => {
+    firestore()
+      .collection('users')
+      .doc(sentid)
+      .update({petimage: 'Casper'})
+      .then(() => {
+        console.log('Pet updated!');
+      });
     navigation.navigate('Drawer', {
       screen: 'Change break frequency',
+      params: {id: sentid},
     });
-    //firestore.collection('users')
-
   };
-
+  const onChosen2 = () => {
+    firestore()
+      .collection('users')
+      .doc(sentid)
+      .update({petimage: 'Camo'})
+      .then(() => {
+        console.log('Pet updated!');
+      });
+    navigation.navigate('Drawer', {
+      screen: 'Change break frequency',
+      params: {id: sentid},
+    });
+  };
+  const onChosen3 = () => {
+    firestore()
+      .collection('users')
+      .doc(sentid)
+      .update({petimage: 'Cuincy'})
+      .then(() => {
+        console.log('Pet updated!');
+      });
+    navigation.navigate('Drawer', {
+      screen: 'Change break frequency',
+      params: {id: sentid},
+    });
+  };
 
   return (
     <ScrollView>
@@ -47,7 +78,7 @@ const ChoosePetScreen = () => {
           Casper the Curious Prince-in-waiting
         </Text>
         <Text> </Text>
-        <CustomButton text="Choose" onPress={onChosen} />
+        <CustomButton text="Choose" onPress={onChosen1} />
 
         <Text> </Text>
         <Image
@@ -58,7 +89,7 @@ const ChoosePetScreen = () => {
         <Text> </Text>
         <Text style={styles.description}>Camo the Cloudchaser</Text>
         <Text> </Text>
-        <CustomButton text="Choose" onPress={onChosen} />
+        <CustomButton text="Choose" onPress={onChosen2} />
 
         <Text> </Text>
         <Image
@@ -71,7 +102,7 @@ const ChoosePetScreen = () => {
           Cuincy the Creative Conceptualizer
         </Text>
         <Text> </Text>
-        <CustomButton text="Choose" onPress={onChosen} />
+        <CustomButton text="Choose" onPress={onChosen3} />
       </View>
     </ScrollView>
   );

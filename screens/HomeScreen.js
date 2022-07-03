@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   View,
   Text,
@@ -17,16 +17,45 @@ import MainBackground from '../assets/MainBackground.png';
 import ChooseInterval from './ChooseInterval';
 import LoginScreen from './LoginScreen';
 import Casper from '../assets/Casper.png';
+import Camo from '../assets/Camo.png';
+import Cuincy from '../assets/Cuincy.png';
+import firestore from '@react-native-firebase/firestore';
 //import BackgroundTimer from 'react-native-background-timer';
 const HomeScreen = () => {
   const navigation = useNavigation();
   const {height} = useWindowDimensions();
-
+  const [source, setSource] = useState();
+  const route = useRoute();
+  const {sentid} = route.params;
   const onStartBreakPressed = () => {
     //console.warn("Register");
     navigation.navigate('Break Timer');
     //BackgroundTimer.start();
   };
+  const getPetURL = petName => {
+    if (petName === 'uninitialised') {
+      return null;
+    } else if (petName === 'Casper') {
+      return Casper;
+    } else if (petName === 'Camo') {
+      return Camo;
+    } else if (petName === 'Cuincy') {
+      return Cuincy;
+    }
+
+    return;
+  };
+
+  useEffect(() => {
+    const func = async () => {
+      const user = await firestore().collection('users').doc(sentid).get();
+      setSource(getPetURL(user._data.petimage));
+      console.log(user);
+      console.log(source);
+    };
+
+    func();
+  });
 
   return (
     <View style={styles.root}>
@@ -53,11 +82,13 @@ const HomeScreen = () => {
         <Text> </Text>
         <Text> </Text>
         <Text> </Text>
-        <Image
-          source={Casper}
-          style={[styles.badge, {height: height}]}
-          resizeMode="stretch"
-        />
+        {source && (
+          <Image
+            source={source}
+            style={[styles.badge, {height: height}]}
+            resizeMode="stretch"
+          />
+        )}
         <Text> </Text>
         <Text> </Text>
         <Text> </Text>

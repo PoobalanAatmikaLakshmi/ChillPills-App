@@ -12,13 +12,16 @@ import SelectDropdown from 'react-native-select-dropdown';
 //import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import CustomButton from '../Components/CustomButton';
 import {useNavigation} from '@react-navigation/native';
+import {useRoute} from '@react-navigation/native';
 import {Navigation} from 'react-native-navigation';
 const ChooseInterval = () => {
   const {height} = useWindowDimensions();
+  const route = useRoute();
+  const {id} = route.params;
   const interval = ['25 minutes', '50 minutes', '90 minutes'];
   const navigation = useNavigation();
   const onChosen = () => {
-    navigation.navigate('Drawer', {screen: 'Home'});
+    navigation.navigate('Drawer', {screen: 'Home', params: {sentid: id}});
     //console.warn("Go to Home Page")ss;
   };
   return (
