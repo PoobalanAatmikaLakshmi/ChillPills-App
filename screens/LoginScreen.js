@@ -46,7 +46,10 @@ const LoginScreen = () => {
               return;
             }
             const user = firestoreDocument.data();
-            navigation.navigate('Drawer', {screen: 'Home'}, {user});
+            navigation.navigate('Drawer', {
+              screen: 'Home',
+              params: {data: user},
+            });
           })
           .catch(error => {
             alert(error);

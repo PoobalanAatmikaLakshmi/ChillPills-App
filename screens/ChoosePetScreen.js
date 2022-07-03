@@ -23,14 +23,14 @@ const ChoosePetScreen = () => {
   const navigation = useNavigation();
 
   const onChosen = () => {
-    //async (source) => {
-    // await firestore().collection('users').doc(id).update({petimage: source})
-    // .catch((error) => {
-    //     alert(error)
-    // });
+    
+    navigation.navigate('Drawer', {
+      screen: 'Change break frequency',
+    });
+    //firestore.collection('users')
 
-    navigation.navigate('Drawer', {screen: 'Change break frequency'});
   };
+
 
   return (
     <ScrollView>

@@ -30,7 +30,7 @@ const SignUpScreen = () => {
           id: uid,
           email,
           fullName,
-          //petimage: 'uninitialized',
+          petimage: 'uninitialized',
         };
         const usersRef = firestore().collection('users');
         usersRef
