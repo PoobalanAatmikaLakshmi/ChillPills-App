@@ -29,7 +29,7 @@ const HomeScreen = () => {
   const {sentid} = route.params;
   const onStartBreakPressed = () => {
     //console.warn("Register");
-    navigation.navigate('Break Timer');
+    navigation.navigate('ChooseBreakActivity');
     //BackgroundTimer.start();
   };
   const getPetURL = petName => {

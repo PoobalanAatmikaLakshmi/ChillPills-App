@@ -2,13 +2,15 @@ import React, {useEffect, useState} from 'react';
 import {View, Text, StyleSheet} from 'react-native';
 import CustomButton from '../Components/CustomButton';
 import BackgroundTimer from 'react-native-background-timer';
-
+import CustomInput from '../Components/CustomInput';
 const BreakTimer = () => {
   const onselected = () => {
     console.warn('Go to Music Page');
   };
+  const [prefTime, setPrefTime] = useState();
   const [secondsLeft, setSecondsLeft] = useState(600);
   const [timerOn, setTimerOn] = useState(false);
+  
   // Runs when timerOn value changes to start or stop timer
   useEffect(() => {
     if (timerOn) {
@@ -52,6 +54,12 @@ const BreakTimer = () => {
     <View style={styles.root}>
       <Text> </Text>
       <Text> </Text>
+      <CustomInput
+        placeholder="Key in your preferred time duration in seconds"
+        value={prefTime}
+        setValue={setPrefTime}
+      />
+
       <Text style={styles.title}> It is time to unwind: </Text>
       <Text> </Text>
       <Text style={styles.timer}>

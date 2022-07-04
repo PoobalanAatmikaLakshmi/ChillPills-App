@@ -22,6 +22,8 @@ pod 'FirebaseFirestore'
     :app_path => "#{Pod::Config.instance.installation_root}/.."
   )
 
+  pod 'RNVectorIcons', :path => '../node_modules/react-native-vector-icons'
+
   target 'myprojectTests' do
     inherit! :complete
     # Pods for testing
