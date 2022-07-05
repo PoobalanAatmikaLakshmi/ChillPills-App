@@ -7,10 +7,9 @@ const BreakTimer = () => {
   const onselected = () => {
     console.warn('Go to Music Page');
   };
-  const [prefTime, setPrefTime] = useState();
   const [secondsLeft, setSecondsLeft] = useState(600);
   const [timerOn, setTimerOn] = useState(false);
-  
+
   // Runs when timerOn value changes to start or stop timer
   useEffect(() => {
     if (timerOn) {
@@ -50,16 +49,28 @@ const BreakTimer = () => {
       displaySecs,
     };
   };
+  const handleInput = text => {
+    const currValue = parseInt(text, 10);
+    if (currValue > 1800) {
+      setSecondsLeft(1800);
+    } else if (isNaN(currValue)) {
+      setSecondsLeft(0);
+    } else {
+      setSecondsLeft(currValue);
+    }
+  };
+
   return (
     <View style={styles.root}>
-      <Text> </Text>
-      <Text> </Text>
       <CustomInput
-        placeholder="Key in your preferred time duration in seconds"
-        value={prefTime}
-        setValue={setPrefTime}
+        placeholder="Key in your preferred time duration in sec"
+        value={secondsLeft}
+        setValue={text => handleInput(text)}
+        keyboardType="numeric"
       />
-
+<Text> </Text>
+<Text> </Text>
+<Text> </Text>
       <Text style={styles.title}> It is time to unwind: </Text>
       <Text> </Text>
       <Text style={styles.timer}>

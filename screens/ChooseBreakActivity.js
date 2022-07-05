@@ -3,14 +3,15 @@ import {ScrollView, StyleSheet, Image, View} from 'react-native';
 import {Button, Card, Icon, Text} from 'react-native-elements';
 import CustomButton from '../Components/CustomButton';
 import {useNavigation} from '@react-navigation/native';
-import realmeditation from '../assets/realmeditation.png';
-import exercise from '../assets/exercise.png';
+import Meditation from '../assets/Meditation.png';
+import Exercise from '../assets/Exercise.png';
+import otheractivities from '../assets/otheractivities.png';
 import sleep from '../assets/sleep.png';
 const ChooseBreakActivity = () => {
   const navigation = useNavigation();
   const onChosen = () => {
     navigation.navigate('Break Timer');
-    //console.warn("Go to Home Page")ss;
+    //console.warn("Go to Home Page");
   };
   //const urlImage =
   //'https://raw.githubusercontent.com/RushikeshVidhate/react-native-exercise-app/main/app/assets/images/Exercise3.png';
@@ -22,11 +23,13 @@ const ChooseBreakActivity = () => {
           Choose how you want to spend your break!
         </Text>
         <Card>
-          <Card.Title>Meditation</Card.Title>
+          <Card.Title style={styles.fonts} h3>
+            Meditation
+          </Card.Title>
           <Card.Divider />
           <Card.Image
             style={({padding: 5}, {width: 350}, {height: 300})}
-            source={realmeditation}
+            source={Meditation}
           />
           <Text style={{marginBottom: 5}}>
             Benefits of meditation are wide ranging
@@ -34,19 +37,23 @@ const ChooseBreakActivity = () => {
           <CustomButton text="Choose" onPress={onChosen} />
         </Card>
         <Card>
-          <Card.Title>Exercise</Card.Title>
+          <Card.Title style={styles.fonts} h3>
+            Exercise
+          </Card.Title>
           <Card.Divider />
           <Card.Image
             style={({padding: 5}, {width: 350}, {height: 310})}
-            source={exercise}
+            source={Exercise}
           />
           <Text style={{marginBottom: 10}}>
-            Exercise of any form boost physical and mental health!
+            Exercise of any form boosts physical and mental health!
           </Text>
           <CustomButton text="Choose" onPress={onChosen} />
         </Card>
         <Card>
-          <Card.Title>Take a nap </Card.Title>
+          <Card.Title style={styles.fonts} h3>
+            Take a nap
+          </Card.Title>
           <Card.Divider />
           <Card.Image
             style={({padding: 5}, {width: 350}, {height: 310})}
@@ -56,9 +63,14 @@ const ChooseBreakActivity = () => {
           <CustomButton text="Choose" onPress={onChosen} />
         </Card>
         <Card>
-          <Card.Title>Others</Card.Title>
+          <Card.Title style={styles.fonts} h3>
+            Other Activities
+          </Card.Title>
           <Card.Divider />
-          <Card.Image style={{padding: 0}} source={realmeditation} />
+          <Card.Image
+            style={({padding: 5}, {width: 350}, {height: 310})}
+            source={otheractivities}
+          />
           <Text style={{marginBottom: 10}}>Suggested Activities </Text>
           <CustomButton text="Choose" onPress={onChosen} />
         </Card>
@@ -74,7 +86,7 @@ const styles = StyleSheet.create({
     fontSize: 22,
     fontFamily: 'Futura',
   },
-  description: {
+  fonts: {
     fontFamily: 'Futura',
     fontStyle: 'italic',
   },
