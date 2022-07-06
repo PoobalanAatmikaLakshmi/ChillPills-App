@@ -16,12 +16,12 @@ import {useRoute} from '@react-navigation/native';
 import {Navigation} from 'react-native-navigation';
 const ChooseInterval = () => {
   const {height} = useWindowDimensions();
-  const route = useRoute();
-  const {id} = route.params;
+  //const route = useRoute();
+  //const {userID} = route.params;
   const interval = ['25 minutes', '50 minutes', '90 minutes'];
   const navigation = useNavigation();
   const onChosen = () => {
-    navigation.navigate('Drawer', {screen: 'Home', params: {sentid: id}});
+    navigation.navigate('Drawer', {screen: 'Home'});
     //console.warn("Go to Home Page")ss;
   };
   return (

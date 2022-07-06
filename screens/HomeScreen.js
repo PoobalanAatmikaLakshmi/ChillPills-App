@@ -16,9 +16,22 @@ import {NavigationContainer, useNavigation} from '@react-navigation/native';
 import MainBackground from '../assets/MainBackground.png';
 import ChooseInterval from './ChooseInterval';
 import LoginScreen from './LoginScreen';
+
 import Casper from '../assets/Casper.png';
+import CasperBHome from '../assets/CasperBHome.png';
+import CasperRHome from '../assets/CasperRHome.png';
+import CasperPHome from '../assets/CasperPHome.png';
+
 import Camo from '../assets/Camo.png';
+import CamoBHome from '../assets/CamoBHome.png';
+import CamoRHome from '../assets/CamoRHome.png';
+import CamoPHome from '../assets/CamoPHome.png';
+
 import Cuincy from '../assets/Cuincy.png';
+import CuincyBHome from '../assets/CuincyBHome.png';
+import CuincyRHome from '../assets/CuincyRHome.png';
+import CuincyPHome from '../assets/CuincyPHome.png';
+
 import firestore from '@react-native-firebase/firestore';
 //import BackgroundTimer from 'react-native-background-timer';
 const HomeScreen = () => {
@@ -26,7 +39,7 @@ const HomeScreen = () => {
   const {height} = useWindowDimensions();
   const [source, setSource] = useState();
   const route = useRoute();
-  const {sentid} = route.params;
+  const {userID} = route.params;
   const onStartBreakPressed = () => {
     //console.warn("Register");
     navigation.navigate('ChooseBreakActivity');
@@ -41,14 +54,33 @@ const HomeScreen = () => {
       return Camo;
     } else if (petName === 'Cuincy') {
       return Cuincy;
+    } else if (petName === 'CasperB') {
+      return CasperBHome;
+    } else if (petName === 'CasperR') {
+      return CasperRHome;
+    } else if (petName === 'CasperP') {
+      return CasperPHome;
+    } else if (petName === 'CamoB') {
+      return CamoBHome;
+    } else if (petName === 'CamoR') {
+      return CamoRHome;
+    } else if (petName === 'CamoP') {
+      return CamoPHome;
+    } else if (petName === 'CuincyB') {
+      return CuincyBHome;
+    } else if (petName === 'CuincyP') {
+      return CuincyPHome;
+    } else if (petName === 'CuincyR') {
+      return CuincyRHome;
     }
+
 
     return;
   };
 
   useEffect(() => {
     const func = async () => {
-      const user = await firestore().collection('users').doc(sentid).get();
+      const user = await firestore().collection('users').doc(userID).get();
       setSource(getPetURL(user._data.petimage));
       console.log(user);
       console.log(source);
@@ -121,9 +153,9 @@ const styles = StyleSheet.create({
     marginBottom: 36,
   },
   badge: {
-    width: '80%',
-    maxWidth: 170,
-    maxHeight: 170,
+    width: '100%',
+    maxWidth: 250,
+    maxHeight: 250,
     alignItems: 'center',
     justifyContent: 'center',
   },

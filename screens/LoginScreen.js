@@ -47,13 +47,11 @@ const LoginScreen = () => {
             }
             const user = firestoreDocument.data();
             if (user.petimage === 'uninitialized') {
-              navigation.navigate('Choose A Pet!', {
-                id: uid,
-              });
+              navigation.navigate('Choose A Pet!');
             } else {
               navigation.navigate('Drawer', {
                 screen: 'Home',
-                params: {sentid: uid},
+                params: {coins: user.chillCoin},
               });
             }
           })

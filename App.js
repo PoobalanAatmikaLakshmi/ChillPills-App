@@ -18,15 +18,19 @@ import BreakTimer from './screens/BreakTimer';
 import {firebase} from '@react-native-firebase/auth';
 import {Navigation} from 'react-native-navigation';
 import ChooseBreakActivity from './screens/ChooseBreakActivity';
+import ShopScreen from './screens/ShopScreen';
 
 const Drawer = createDrawerNavigator();
 const AppStack = createStackNavigator();
+let user = firebase.auth().currentUser;
 function MyDrawer() {
   const navigation = useNavigation();
-
   const onlogoutpressed = () => {
     auth().signOut();
     navigation.navigate('Login');
+  };
+  const onchangepetpressed = () => {
+    navigation.navigate('Choose A Pet!');
   };
   return (
     //add shop screen later
@@ -36,6 +40,7 @@ function MyDrawer() {
       <Drawer.Screen
         name="Home"
         component={HomeScreen}
+        initialParams={{userID: user.uid}}
         options={{
           headerRight: () => (
             <Button onPress={onlogoutpressed} title="Logout" color="#8A584C" />
@@ -44,6 +49,20 @@ function MyDrawer() {
       />
 
       <Drawer.Screen name="Change break frequency" component={ChooseInterval} />
+      <Drawer.Screen
+        name="Shop"
+        component={ShopScreen}
+        initialParams={{userID: user.uid}}
+        options={{
+          headerRight: () => (
+            <Button
+              onPress={onchangepetpressed}
+              title="Change Pet"
+              color="#0095AB"
+            />
+          ),
+        }}
+      />
     </Drawer.Navigator>
   );
 }
@@ -59,11 +78,20 @@ function AppScreens() {
         component={ResetPasswordScreen}
       />
       <AppStack.Screen name="Login" component={LoginScreen} />
-      <AppStack.Screen name="Choose A Pet!" component={ChoosePetScreen} />
-      <AppStack.Screen name="Break Timer" component={BreakTimer} />
+      <AppStack.Screen
+        name="Choose A Pet!"
+        component={ChoosePetScreen}
+        initialParams={{userID: user.uid}}
+      />
+      <AppStack.Screen
+        name="Break Timer"
+        component={BreakTimer}
+        initialParams={{userID: user.uid}}
+      />
       <AppStack.Screen
         name="ChooseBreakActivity"
         component={ChooseBreakActivity}
+        initialParams={{userID: user.uid}}
       />
 
       <AppStack.Screen

@@ -22,44 +22,41 @@ const ChoosePetScreen = () => {
   const {height} = useWindowDimensions();
   const navigation = useNavigation();
   const route = useRoute();
-  const sentid = route.params.id;
+  const {userID} = route.params;
   const onChosen1 = () => {
     firestore()
       .collection('users')
-      .doc(sentid)
+      .doc(userID)
       .update({petimage: 'Casper'})
       .then(() => {
         console.log('Pet updated!');
       });
     navigation.navigate('Drawer', {
       screen: 'Change break frequency',
-      params: {id: sentid},
     });
   };
   const onChosen2 = () => {
     firestore()
       .collection('users')
-      .doc(sentid)
+      .doc(userID)
       .update({petimage: 'Camo'})
       .then(() => {
         console.log('Pet updated!');
       });
     navigation.navigate('Drawer', {
       screen: 'Change break frequency',
-      params: {id: sentid},
     });
   };
   const onChosen3 = () => {
     firestore()
       .collection('users')
-      .doc(sentid)
+      .doc(userID)
       .update({petimage: 'Cuincy'})
       .then(() => {
         console.log('Pet updated!');
       });
     navigation.navigate('Drawer', {
       screen: 'Change break frequency',
-      params: {id: sentid},
     });
   };
 
