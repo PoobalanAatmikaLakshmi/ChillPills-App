@@ -3,29 +3,48 @@ import {View, Text, StyleSheet} from 'react-native';
 import CustomButton from '../Components/CustomButton';
 import BackgroundTimer from 'react-native-background-timer';
 import CustomInput from '../Components/CustomInput';
+import {useRoute} from '@react-navigation/native';
+import firestore from '@react-native-firebase/firestore';
+import {firebase} from '@react-native-firebase/auth';
 const BreakTimer = () => {
   const onselected = () => {
     console.warn('Go to Music Page');
   };
-  const [secondsLeft, setSecondsLeft] = useState(600);
+  const [secondsLeft, setSecondsLeft] = useState(30);
+  const [secondsRemaining, setSecondsRemaining] = useState();
   const [timerOn, setTimerOn] = useState(false);
-
+  const route = useRoute();
+  const {userID} = route.params;
   // Runs when timerOn value changes to start or stop timer
   useEffect(() => {
     if (timerOn) {
       startTimer();
+      setSecondsRemaining(secondsLeft);
     } else {
       BackgroundTimer.stopBackgroundTimer();
     }
     return () => {
       BackgroundTimer.stopBackgroundTimer();
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [timerOn]);
 
   useEffect(() => {
     if (secondsLeft === 0) {
-      BackgroundTimer.stopBackgroundTimer();
+      var coins = addChillCoins(secondsRemaining);
+      const updatecoins = async () => {
+        await firestore()
+          .collection('users')
+          .doc(userID)
+          .update({chillCoins: firebase.firestore.FieldValue.increment(coins)})
+          .then(() => {
+            console.log('Added Coins');
+          });
+        BackgroundTimer.stopBackgroundTimer();
+      };
+      updatecoins();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [secondsLeft]);
 
   const startTimer = () => {
@@ -51,13 +70,26 @@ const BreakTimer = () => {
   };
   const handleInput = text => {
     const currValue = parseInt(text, 10);
-    if (currValue > 1800) {
+    if (currValue < 600) {
+      setSecondsLeft(30);
+    } else if (currValue > 1800) {
       setSecondsLeft(1800);
     } else if (isNaN(currValue)) {
       setSecondsLeft(0);
     } else {
       setSecondsLeft(currValue);
     }
+    console.log(secondsLeft);
+  };
+
+  const addChillCoins = async value => {
+    if (value <= 1020) {
+      var Coins = Math.ceil(2 * (value / 60));
+    } else if (value > 1020) {
+      var Coins = Math.ceil(value / 60);
+    }
+
+    return Coins;
   };
 
   return (
@@ -68,9 +100,9 @@ const BreakTimer = () => {
         setValue={text => handleInput(text)}
         keyboardType="numeric"
       />
-<Text> </Text>
-<Text> </Text>
-<Text> </Text>
+      <Text> </Text>
+      <Text> </Text>
+      <Text> </Text>
       <Text style={styles.title}> It is time to unwind: </Text>
       <Text> </Text>
       <Text style={styles.timer}>

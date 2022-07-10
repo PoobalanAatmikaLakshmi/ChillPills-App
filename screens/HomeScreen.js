@@ -2,7 +2,6 @@ import React, {useEffect, useState} from 'react';
 import {
   View,
   Text,
-  Button,
   StyleSheet,
   Input,
   ImageBackground,
@@ -12,6 +11,7 @@ import {
 import {createDrawerNavigator} from '@react-navigation/drawer';
 import {useRoute} from '@react-navigation/native';
 import CustomButton from '../Components/CustomButton';
+import {Button} from 'react-native-elements';
 import {NavigationContainer, useNavigation} from '@react-navigation/native';
 import MainBackground from '../assets/MainBackground.png';
 import ChooseInterval from './ChooseInterval';
@@ -74,7 +74,6 @@ const HomeScreen = () => {
       return CuincyRHome;
     }
 
-
     return;
   };
 
@@ -88,13 +87,15 @@ const HomeScreen = () => {
 
     func();
   });
-
+  //text="It is time for a break!"
+  //onPress={onStartBreakPressed}
   return (
     <View style={styles.root}>
       <ImageBackground
         source={MainBackground}
         resizeMode="cover"
         style={{width: '100%', height: '100%'}}>
+          
         <Text> </Text>
         <Text> </Text>
         <Text> </Text>
@@ -124,10 +125,31 @@ const HomeScreen = () => {
         <Text> </Text>
         <Text> </Text>
         <Text> </Text>
+        
         <View style={styles.bottom}>
-          <CustomButton
-            text="It is time for a break!"
+          <Button
+            title="It's time to take a break!"
             onPress={onStartBreakPressed}
+            //icon={{
+            //  name: 'hourglass-start',
+            //  type: 'font-awesome',
+            //  size: 15,
+             // color: 'white',
+           // }}
+            iconContainerStyle={{marginRight: 10}}
+            titleStyle={{fontWeight: '900'}}
+          
+            buttonStyle={{
+              backgroundColor: 'rgba(90, 154, 230, 1)',
+              borderColor: 'peach',
+              borderWidth: 0,
+              borderRadius: 30,
+            }}
+            containerStyle={{
+              width: 240,
+              marginHorizontal: 80,
+              marginVertical: 0,
+            }}
           />
           <Text> </Text>
           <Text> </Text>

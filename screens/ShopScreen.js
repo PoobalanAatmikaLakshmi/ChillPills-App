@@ -74,6 +74,7 @@ const ShopScreen = () => {
         .update({petimage: 'CuincyB'})
         .then(() => {
           console.log('New skin updated!');
+          navigation.navigate('Home');
 
         });
     } else if (source === CasperB) {
@@ -83,6 +84,8 @@ const ShopScreen = () => {
         .update({petimage: 'CasperB'})
         .then(() => {
           console.log('New skin updated!');
+          navigation.navigate('Home');
+
         });
     } else if (source === CamoB) {
       firestore()
@@ -91,6 +94,7 @@ const ShopScreen = () => {
         .update({petimage: 'CamoB'})
         .then(() => {
           console.log('New skin updated!');
+          navigation.navigate('Home');
           //const user = firestore().collection('users').doc(userID).get();
           //console.log(user);
         });
