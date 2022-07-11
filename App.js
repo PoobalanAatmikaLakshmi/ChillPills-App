@@ -20,6 +20,8 @@ import {Navigation} from 'react-native-navigation';
 import ChooseBreakActivity from './screens/ChooseBreakActivity';
 import ShopScreen from './screens/ShopScreen';
 
+//This file will be executed 
+
 const Drawer = createDrawerNavigator();
 const AppStack = createStackNavigator();
 let user = firebase.auth().currentUser;
