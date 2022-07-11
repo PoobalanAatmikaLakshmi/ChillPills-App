@@ -4,7 +4,7 @@ import {Button, Card, Icon, Text} from 'react-native-elements';
 import CustomButton from '../Components/CustomButton';
 import {useNavigation} from '@react-navigation/native';
 import Meditation from '../assets/Meditation.png';
-import Exercise from '../assets/Exercise.png';
+import exercise from '../assets/exercise.png';
 import otheractivities from '../assets/otheractivities.png';
 import sleep from '../assets/sleep.png';
 const ChooseBreakActivity = () => {
@@ -43,7 +43,7 @@ const ChooseBreakActivity = () => {
           <Card.Divider />
           <Card.Image
             style={({padding: 5}, {width: 350}, {height: 310})}
-            source={Exercise}
+            source={exercise}
           />
           <Text style={{marginBottom: 10}}>
             Exercise of any form boosts physical and mental health!
