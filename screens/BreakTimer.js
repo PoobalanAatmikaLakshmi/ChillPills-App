@@ -31,20 +31,20 @@ const BreakTimer = () => {
 
   useEffect(() => {
     if (secondsLeft === 0) {
-      var coins = addChillCoins(secondsRemaining);
+      const coins = addChillCoins(secondsRemaining);
+      console.log(coins);
+
+      BackgroundTimer.stopBackgroundTimer();
       const updatecoins = async () => {
         await firestore()
           .collection('users')
           .doc(userID)
           .update({
-            chillCoins: firebase.firestore.FieldValue.increment(1),
+            chillCoins: firebase.firestore.FieldValue.increment(coins),
           });
-        BackgroundTimer.stopBackgroundTimer();
       };
-      for (let i = 0; i < coins; i++) {
-        updatecoins();
-        console.log('running');
-      }
+      updatecoins();
+
       console.log('added coins');
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -85,14 +85,15 @@ const BreakTimer = () => {
     console.log(secondsLeft);
   };
 
-  const addChillCoins = async value => {
+  const addChillCoins = value => {
+    let coins;
     if (value <= 1020) {
-      var Coins = Math.ceil(2 * (value / 60));
+      coins = Math.ceil(2 * (value / 60));
     } else if (value > 1020) {
-      var Coins = Math.ceil(value / 60);
+      coins = Math.ceil(value / 60);
     }
 
-    return Coins;
+    return coins;
   };
 
   return (
