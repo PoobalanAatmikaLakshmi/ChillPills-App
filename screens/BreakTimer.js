@@ -36,13 +36,16 @@ const BreakTimer = () => {
         await firestore()
           .collection('users')
           .doc(userID)
-          .update({chillCoins: firebase.firestore.FieldValue.increment(coins)})
-          .then(() => {
-            console.log('Added Coins');
+          .update({
+            chillCoins: firebase.firestore.FieldValue.increment(1),
           });
         BackgroundTimer.stopBackgroundTimer();
       };
-      updatecoins();
+      for (let i = 0; i < coins; i++) {
+        updatecoins();
+        console.log('running');
+      }
+      console.log('added coins');
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [secondsLeft]);
