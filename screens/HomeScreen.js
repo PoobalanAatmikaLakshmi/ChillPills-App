@@ -147,7 +147,7 @@ const HomeScreen = () => {
         <Text> </Text>
 
         <View style={styles.bottom}>
-          <CustomButton text="chillcoins :" />
+          
           <Button
             title="It's time to take a break!"
             onPress={onStartBreakPressed}
@@ -168,7 +168,7 @@ const HomeScreen = () => {
             containerStyle={{
               width: 240,
               marginHorizontal: 80,
-              marginVertical: 0,
+              marginVertical: 5,
             }}
           />
           <Text> </Text>
