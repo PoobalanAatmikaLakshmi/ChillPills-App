@@ -149,7 +149,7 @@ const HomeScreen = () => {
         <View style={styles.bottom}>
           
           <Button
-            title="It's time to take a break!"
+            title="Time for a Break!"
             onPress={onStartBreakPressed}
             //icon={{
             //  name: 'hourglass-start',
@@ -160,7 +160,7 @@ const HomeScreen = () => {
             iconContainerStyle={{marginRight: 10}}
             titleStyle={{fontWeight: '900'}}
             buttonStyle={{
-              backgroundColor: 'rgba(90, 154, 230, 1)',
+              backgroundColor: 'rgba(169, 110, 108, 1)',
               borderColor: 'peach',
               borderWidth: 0,
               borderRadius: 30,
