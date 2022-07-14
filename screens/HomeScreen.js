@@ -34,11 +34,13 @@ import CuincyPHome from '../assets/CuincyPHome.png';
 
 import {firebase} from '@react-native-firebase/auth';
 import firestore from '@react-native-firebase/firestore';
+import {set} from 'react-native-reanimated';
 //import BackgroundTimer from 'react-native-background-timer';
 const HomeScreen = () => {
   const navigation = useNavigation();
   const {height} = useWindowDimensions();
   const [source, setSource] = useState();
+  const [coins, setCoins] = useState();
   let user = firebase.auth().currentUser;
   //const route = useRoute();
   //const {userID} = route.params;
@@ -89,6 +91,23 @@ const HomeScreen = () => {
 
     func();
   });
+
+  /* useEffect(() => {
+    const getcoins = async () => {
+      await firestore()
+        .collection('Users')
+        .doc(user.uid)
+        .onSnapshot(documentSnapshot => {
+          const coinCount = documentSnapshot.get(user.uid.chillCoins);
+          setCoins(coinCount);
+        });
+    };
+    getcoins();
+    // Stop listening for updates when no longer required
+    //return () => subscriber();
+  });
+  */
+
   //text="It is time for a break!"
   //onPress={onStartBreakPressed}
   return (
@@ -97,7 +116,6 @@ const HomeScreen = () => {
         source={MainBackground}
         resizeMode="cover"
         style={{width: '100%', height: '100%'}}>
-
         <Text> </Text>
         <Text> </Text>
         <Text> </Text>
@@ -127,8 +145,9 @@ const HomeScreen = () => {
         <Text> </Text>
         <Text> </Text>
         <Text> </Text>
-        
+
         <View style={styles.bottom}>
+          <CustomButton text="chillcoins :" />
           <Button
             title="It's time to take a break!"
             onPress={onStartBreakPressed}
@@ -136,11 +155,10 @@ const HomeScreen = () => {
             //  name: 'hourglass-start',
             //  type: 'font-awesome',
             //  size: 15,
-             // color: 'white',
-           // }}
+            // color: 'white',
+            // }}
             iconContainerStyle={{marginRight: 10}}
             titleStyle={{fontWeight: '900'}}
-          
             buttonStyle={{
               backgroundColor: 'rgba(90, 154, 230, 1)',
               borderColor: 'peach',

@@ -22,12 +22,14 @@ import CamoB from '../assets/CamoB.png';
 import CamoP from '../assets/CamoP.png';
 import CamoR from '../assets/CamoR.png';
 import CustomButton from '../Components/CustomButton';
+import {firebase} from '@react-native-firebase/auth';
 import {Button} from 'react-native-elements';
 const ShopScreen = () => {
   const navigation = useNavigation();
   const {height} = useWindowDimensions();
-  const route = useRoute();
-  const {userID} = route.params;
+  let user = firebase.auth().currentUser;
+  //const route = useRoute();
+  //const {userID} = route.params;
   //const userid = route.initialParams.id;
   const [source1, setSource1] = useState();
   const [source2, setSource2] = useState();
@@ -50,19 +52,33 @@ const ShopScreen = () => {
 
   useEffect(() => {
     const func = async () => {
-      const user = await firestore().collection('users').doc(userID).get();
-      //console.log(userID);
-      if (user._data.petimage === 'Cuincy') {
+      const User = await firestore().collection('users').doc(user.uid).get();
+      console.log(User);
+      if (
+        User._data.petimage === 'Cuincy' ||
+        User._data.petimage === 'CuincyB' ||
+        User._data.petimage === 'CuincyP' ||
+        User._data.petimage === 'CuincyR'
+      ) {
         getCuincyURL();
         //console.log(userID);
-      } else if (user._data.petimage === 'Casper') {
+      } else if (
+        User._data.petimage === 'Casper' ||
+        User._data.petimage === 'CasperB' ||
+        User._data.petimage === 'CasperP' ||
+        User._data.petimage === 'CasperR'
+      ) {
         getCasperURL();
         //console.log(user);
-      } else if (user._data.petimage === 'Camo') {
+      } else if (
+        User._data.petimage === 'Camo' ||
+        User._data.petimage === 'CamoB' ||
+        User._data.petimage === 'CamoP' ||
+        User._data.petimage === 'CamoR'
+      ) {
         getCamoURL();
         //console.log(source);
       }
-
     };
     func();
   });
@@ -70,27 +86,25 @@ const ShopScreen = () => {
     if (source === CuincyB) {
       firestore()
         .collection('users')
-        .doc(userID)
+        .doc(user.uid)
         .update({petimage: 'CuincyB'})
         .then(() => {
           console.log('New skin updated!');
           navigation.navigate('Home');
-
         });
     } else if (source === CasperB) {
       firestore()
         .collection('users')
-        .doc(userID)
+        .doc(user.uid)
         .update({petimage: 'CasperB'})
         .then(() => {
           console.log('New skin updated!');
           navigation.navigate('Home');
-
         });
     } else if (source === CamoB) {
       firestore()
         .collection('users')
-        .doc(userID)
+        .doc(user.uid)
         .update({petimage: 'CamoB'})
         .then(() => {
           console.log('New skin updated!');
@@ -105,24 +119,24 @@ const ShopScreen = () => {
     if (source === CuincyR) {
       firestore()
         .collection('users')
-        .doc(userID)
+        .doc(user.uid)
         .update({petimage: 'CuincyR'})
         .then(() => {
           console.log('New skin updated!');
-
         });
     } else if (source === CasperR) {
       firestore()
         .collection('users')
-        .doc(userID)
+        .doc(user.uid)
         .update({petimage: 'CasperR'})
         .then(() => {
           console.log('New skin updated!');
+          navigation.navigate('Home');
         });
     } else if (source === CamoR) {
       firestore()
         .collection('users')
-        .doc(userID)
+        .doc(user.uid)
         .update({petimage: 'CamoR'})
         .then(() => {
           console.log('New skin updated!');
@@ -131,21 +145,21 @@ const ShopScreen = () => {
         });
     }
     console.log('R ran');
+    console.log(user);
   };
   const updateSkinP = source => {
     if (source === CuincyP) {
       firestore()
         .collection('users')
-        .doc(userID)
+        .doc(user.uid)
         .update({petimage: 'CuincyP'})
         .then(() => {
           console.log('New skin updated!');
-
         });
     } else if (source === CasperP) {
       firestore()
         .collection('users')
-        .doc(userID)
+        .doc(user.uid)
         .update({petimage: 'CasperP'})
         .then(() => {
           console.log('New skin updated!');
@@ -153,7 +167,7 @@ const ShopScreen = () => {
     } else if (source === CamoP) {
       firestore()
         .collection('users')
-        .doc(userID)
+        .doc(user.uid)
         .update({petimage: 'CamoP'})
         .then(() => {
           console.log('New skin updated!');
@@ -164,7 +178,7 @@ const ShopScreen = () => {
     console.log('P ran');
   };
   return (
-    <ScrollView contentContainerStyle={{flex:1}}>
+    <ScrollView contentContainerStyle={{flex: 1}}>
       <View style={styles.root}>
         {source1 && (
           <Image
