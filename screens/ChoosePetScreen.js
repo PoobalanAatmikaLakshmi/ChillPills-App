@@ -16,17 +16,19 @@ import CamoBadge from '../assets/CamoBadge.png';
 import CuincyBadge from '../assets/CuincyBadge.png';
 import {Navigation} from 'react-native-navigation';
 import firestore from '@react-native-firebase/firestore';
+import {firebase} from '@react-native-firebase/auth';
 import {useRoute} from '@react-navigation/native';
 
 const ChoosePetScreen = () => {
   const {height} = useWindowDimensions();
   const navigation = useNavigation();
-  const route = useRoute();
-  const {userID} = route.params;
+  let user = firebase.auth().currentUser;
+  //const route = useRoute();
+  //const {userID} = route.params;
   const onChosen1 = () => {
     firestore()
       .collection('users')
-      .doc(userID)
+      .doc(user.uid)
       .update({petimage: 'Casper'})
       .then(() => {
         console.log('Pet updated!');
@@ -38,7 +40,7 @@ const ChoosePetScreen = () => {
   const onChosen2 = () => {
     firestore()
       .collection('users')
-      .doc(userID)
+      .doc(user.uid)
       .update({petimage: 'Camo'})
       .then(() => {
         console.log('Pet updated!');
@@ -50,7 +52,7 @@ const ChoosePetScreen = () => {
   const onChosen3 = () => {
     firestore()
       .collection('users')
-      .doc(userID)
+      .doc(user.uid)
       .update({petimage: 'Cuincy'})
       .then(() => {
         console.log('Pet updated!');

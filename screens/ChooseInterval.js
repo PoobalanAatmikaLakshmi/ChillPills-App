@@ -12,12 +12,14 @@ import SelectDropdown from 'react-native-select-dropdown';
 //import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import CustomButton from '../Components/CustomButton';
 import {useNavigation} from '@react-navigation/native';
+import {firebase} from '@react-native-firebase/auth';
 import {useRoute} from '@react-navigation/native';
 import {Navigation} from 'react-native-navigation';
 const ChooseInterval = () => {
   const {height} = useWindowDimensions();
   //const route = useRoute();
   //const {userID} = route.params;
+  //let user = firebase.auth().currentUser;
   const interval = ['25 minutes', '50 minutes', '90 minutes'];
   const navigation = useNavigation();
   const onChosen = () => {

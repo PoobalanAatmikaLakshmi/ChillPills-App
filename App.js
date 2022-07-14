@@ -24,7 +24,7 @@ import ShopScreen from './screens/ShopScreen';
 
 const Drawer = createDrawerNavigator();
 const AppStack = createStackNavigator();
-let user = firebase.auth().currentUser;
+//let user = firebase.auth().currentUser;
 function MyDrawer() {
   const navigation = useNavigation();
   const onlogoutpressed = () => {
@@ -42,7 +42,8 @@ function MyDrawer() {
       <Drawer.Screen
         name="Home"
         component={HomeScreen}
-        initialParams={{userID: user.uid}}
+       // initialParams={{userID: user.uid}}
+        onPress
         options={{
           headerRight: () => (
             <Button onPress={onlogoutpressed} title="Logout" color="#8A584C" />
@@ -54,7 +55,7 @@ function MyDrawer() {
       <Drawer.Screen
         name="Shop"
         component={ShopScreen}
-        initialParams={{userID: user.uid}}
+       // initialParams={{userID: user.uid}}
         options={{
           headerRight: () => (
             <Button
@@ -83,17 +84,17 @@ function AppScreens() {
       <AppStack.Screen
         name="Choose A Pet!"
         component={ChoosePetScreen}
-        initialParams={{userID: user.uid}}
+       // initialParams={{userID: user.uid}}
       />
       <AppStack.Screen
         name="Break Timer"
         component={BreakTimer}
-        initialParams={{userID: user.uid}}
+       // initialParams={{userID: user.uid}}
       />
       <AppStack.Screen
         name="ChooseBreakActivity"
         component={ChooseBreakActivity}
-        initialParams={{userID: user.uid}}
+       // initialParams={{userID: user.uid}}
       />
 
       <AppStack.Screen

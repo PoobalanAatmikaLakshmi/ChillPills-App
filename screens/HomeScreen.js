@@ -32,14 +32,16 @@ import CuincyBHome from '../assets/CuincyBHome.png';
 import CuincyRHome from '../assets/CuincyRHome.png';
 import CuincyPHome from '../assets/CuincyPHome.png';
 
+import {firebase} from '@react-native-firebase/auth';
 import firestore from '@react-native-firebase/firestore';
 //import BackgroundTimer from 'react-native-background-timer';
 const HomeScreen = () => {
   const navigation = useNavigation();
   const {height} = useWindowDimensions();
   const [source, setSource] = useState();
-  const route = useRoute();
-  const {userID} = route.params;
+  let user = firebase.auth().currentUser;
+  //const route = useRoute();
+  //const {userID} = route.params;
   const onStartBreakPressed = () => {
     //console.warn("Register");
     navigation.navigate('ChooseBreakActivity');
@@ -79,9 +81,9 @@ const HomeScreen = () => {
 
   useEffect(() => {
     const func = async () => {
-      const user = await firestore().collection('users').doc(userID).get();
-      setSource(getPetURL(user._data.petimage));
-      console.log(user);
+      const User = await firestore().collection('users').doc(user.uid).get();
+      setSource(getPetURL(User._data.petimage));
+      console.log(User);
       console.log(source);
     };
 
@@ -95,7 +97,7 @@ const HomeScreen = () => {
         source={MainBackground}
         resizeMode="cover"
         style={{width: '100%', height: '100%'}}>
-          
+
         <Text> </Text>
         <Text> </Text>
         <Text> </Text>

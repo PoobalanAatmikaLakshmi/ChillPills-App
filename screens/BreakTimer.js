@@ -13,8 +13,9 @@ const BreakTimer = () => {
   const [secondsLeft, setSecondsLeft] = useState(30);
   const [secondsRemaining, setSecondsRemaining] = useState();
   const [timerOn, setTimerOn] = useState(false);
-  const route = useRoute();
-  const {userID} = route.params;
+  //const route = useRoute();
+  //const {userID} = route.params;
+  let user = firebase.auth().currentUser;
   // Runs when timerOn value changes to start or stop timer
   useEffect(() => {
     if (timerOn) {
@@ -38,7 +39,7 @@ const BreakTimer = () => {
       const updatecoins = async () => {
         await firestore()
           .collection('users')
-          .doc(userID)
+          .doc(user.uid)
           .update({
             chillCoins: firebase.firestore.FieldValue.increment(coins),
           });
