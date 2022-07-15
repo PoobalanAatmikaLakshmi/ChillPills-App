@@ -17,12 +17,12 @@ import MainBackground from '../assets/MainBackground.png';
 import ChooseInterval from './ChooseInterval';
 import LoginScreen from './LoginScreen';
 
-import Casper from '../assets/Casper.png';
-import CasperBHome from '../assets/CasperBHome.png';
-import CasperRHome from '../assets/CasperRHome.png';
-import CasperPHome from '../assets/CasperPHome.png';
+import Casper from '../assets/Casper.png'; //standard
+import CasperBHome from '../assets/CasperBHome.png'; //basic
+import CasperRHome from '../assets/CasperRHome.png'; //Rare
+import CasperPHome from '../assets/CasperPHome.png'; //Prestige
 
-import Camo from '../assets/Camo.png';
+import Camo from '../assets/Camo.png'; //standard
 import CamoBHome from '../assets/CamoBHome.png';
 import CamoRHome from '../assets/CamoRHome.png';
 import CamoPHome from '../assets/CamoPHome.png';
@@ -146,7 +146,8 @@ const HomeScreen = () => {
           <Image
             source={source}
             style={[styles.badge, {height: height}]}
-            resizeMode="stretch"
+            resizeMode= "center"
+            alignItems = "center"
           />
         )}
         <Text> </Text>
@@ -154,9 +155,9 @@ const HomeScreen = () => {
         <Text> </Text>
 
         <View style={styles.bottom}>
-          <Text chillcoins />
+          
           <Button
-            title="It's time to take a break!"
+            title="Time for a Break!"
             onPress={onStartBreakPressed}
             //icon={{
             //  name: 'hourglass-start',
@@ -167,7 +168,7 @@ const HomeScreen = () => {
             iconContainerStyle={{marginRight: 10}}
             titleStyle={{fontWeight: '900'}}
             buttonStyle={{
-              backgroundColor: 'rgba(90, 154, 230, 1)',
+              backgroundColor: 'rgba(169, 110, 108, 1)',
               borderColor: 'peach',
               borderWidth: 0,
               borderRadius: 30,
@@ -175,7 +176,7 @@ const HomeScreen = () => {
             containerStyle={{
               width: 240,
               marginHorizontal: 80,
-              marginVertical: 0,
+              marginVertical: 5,
             }}
           />
           <Text> </Text>
@@ -207,5 +208,6 @@ const styles = StyleSheet.create({
     maxHeight: 250,
     alignItems: 'center',
     justifyContent: 'center',
+    marginHorizontal: 70,
   },
 });

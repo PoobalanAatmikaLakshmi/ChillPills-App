@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {View, Text, StyleSheet} from 'react-native';
+import {View, Text, StyleSheet, Linking} from 'react-native';
 import CustomButton from '../Components/CustomButton';
 import BackgroundTimer from 'react-native-background-timer';
 import CustomInput from '../Components/CustomInput';
@@ -108,7 +108,7 @@ const BreakTimer = () => {
       <Text> </Text>
       <Text> </Text>
       <Text> </Text>
-      <Text style={styles.title}> It is time to unwind: </Text>
+      <Text style={styles.title}> It is time to unwind 🥳: </Text>
       <Text> </Text>
       <Text style={styles.timer}>
         {' '}
@@ -122,11 +122,8 @@ const BreakTimer = () => {
       <Text> </Text>
       <Text> </Text>
       <Text> </Text>
-      <Text style={styles.description}>
-        {' '}
-        Meanwhile check out some music we have for you!{' '}
-      </Text>
-      <CustomButton text="To Spotify" onPress={onselected} />
+      <Text style={styles.description}> Listen to music in the meantime!</Text>
+      <CustomButton text="To Spotify" onPress={() => {Linking.openURL('https://open.spotify.com/')}} />
     </View>
   );
 };

@@ -15,6 +15,7 @@ import {useNavigation} from '@react-navigation/native';
 import {firebase} from '@react-native-firebase/auth';
 import {useRoute} from '@react-navigation/native';
 import {Navigation} from 'react-native-navigation';
+
 const ChooseInterval = () => {
   const {height} = useWindowDimensions();
   //const route = useRoute();
@@ -30,17 +31,15 @@ const ChooseInterval = () => {
     <View style={styles.root}>
       <Text> </Text>
       <Text> </Text>
-      <Text style={styles.title}>
-        {' '}
-        How often would you like to take a break?{' '}
-      </Text>
-      <Text> </Text>
+      <Text style={styles.title}>How often would you like to</Text>
+      <Text style={styles.title}>take a break?</Text>
       <Text> </Text>
       <Text> </Text>
       <Text> </Text>
       <Text style={styles.description}>
         I would like to take a break every...
       </Text>
+      <Text> </Text>
       <Text> </Text>
       <SelectDropdown
         data={interval}
@@ -64,12 +63,14 @@ const ChooseInterval = () => {
         rowStyle={styles.dropdown1RowStyle}
         rowTextStyle={styles.dropdown1RowTxtStyle}
       />
-      <Text> </Text>
-      <Text> </Text>
+     <Text> </Text>
+     <Text> </Text> 
+      <Text style={styles.description}>⏳ Hot Tip: Set it to 25 minutes to create</Text>
+      <Text style={styles.description}>a Pomodoro study timer!</Text>
       <Text> </Text>
       <Text> </Text>
       <CustomButton text="Next" onPress={onChosen} />
-    </View>
+    </View> 
   );
 };
 export default ChooseInterval;
@@ -77,12 +78,13 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 23,
     fontFamily: 'Futura',
-    //textAlign : 'justify'
+    justifyContent: "center",
   },
   description: {
     fontSize: 15,
     fontFamily: 'Futura',
     fontStyle: 'italic',
+    justifyContent: "center",
   },
   dropdown1BtnStyle: {
     width: '90%',

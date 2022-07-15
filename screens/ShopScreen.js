@@ -188,38 +188,42 @@ const ShopScreen = () => {
   };
   return (
     <ScrollView contentContainerStyle={{flex: 1}}>
+      
       <View style={styles.root}>
         {source1 && (
           <Image
             source={source1}
             style={[styles.badge, {height: height}]}
-            resizeMode="stretch"
+            resizeMode="center"
           />
         )}
+        <Text style = {styles.description}>🪙 Budget 🪙</Text>
         <CustomButton
-          text="Choose budget skin for 100 ChillCoins!"
+          text="100 ChillCoins"
           onPress={() => updateSkinB(source1)}
         />
         {source2 && (
           <Image
             source={source2}
             style={[styles.badge, {height: height}]}
-            resizeMode="stretch"
+            resizeMode="center"
           />
         )}
+        <Text style = {styles.description}>💵 Rare 💵</Text>
         <CustomButton
-          text="Choose rare skin for 500 ChillCoins!"
+          text="500 ChillCoins"
           onPress={() => updateSkinR(source2)}
         />
         {source3 && (
           <Image
             source={source3}
             style={[styles.badge, {height: height}]}
-            resizeMode="stretch"
+            resizeMode="center"
           />
         )}
+        <Text style = {styles.description}>💎 Prestige 💎</Text>
         <CustomButton
-          text="Choose prestige skin for 1500 ChillCoins!"
+          text="1500 Chillcoins"
           onPress={() => updateSkinP(source3)}
         />
       </View>
@@ -243,5 +247,15 @@ const styles = StyleSheet.create({
     maxHeight: 170,
     alignItems: 'center',
     justifyContent: 'center',
+    
+  },
+  title: {
+    fontSize: 22,
+    fontFamily: 'Futura',
+    padding: 50, 
+  },
+  description: {
+    fontFamily: 'Futura',
+    fontStyle: 'italic',
   },
 });

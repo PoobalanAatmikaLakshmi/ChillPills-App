@@ -28,7 +28,7 @@ const ResetPasswordScreen = () => {
       <CustomButton text="Reset Password" onPress={resetpressed} />
       {showText && (
         <Text style={styles.description}>
-          Check your email for the resetpassword link!
+          Check your email for the link to reset password!
         </Text>
       )}
       {showLoading && (
@@ -38,12 +38,13 @@ const ResetPasswordScreen = () => {
       )}
       <Text> </Text>
       <Text> </Text>
-      <Text> </Text>
       <CustomButton
-        text="Back to login"
+        text="Back to Login"
         onPress={() => {
           navigation.navigate('Login');
         }}
+        bgColor = "#8A584C"
+        fgColor = "#e3e3e3"
       />
     </View>
   );
@@ -61,6 +62,7 @@ const styles = StyleSheet.create({
   description: {
     fontFamily: 'Futura',
     fontStyle: 'italic',
+    justifyContent: "center",
   },
   activity: {
     position: 'absolute',
