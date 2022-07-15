@@ -71,7 +71,7 @@ const ChooseBreakActivity = () => {
             style={({padding: 5}, {width: 350}, {height: 310})}
             source={otheractivities}
           />
-          <Text style={{marginBottom: 10}}>Suggested Activities </Text>
+          <Text style={{marginBottom: 10}}>Eye Break</Text>
           <CustomButton text="Choose" onPress={onChosen} />
         </Card>
       </View>
