@@ -125,14 +125,14 @@ export default function App() {
       console.log('User declined permissions');
       Alert.alert(
         "You have declined Notification Permissions.",
-        "Allow Permissions to Continue",
+        "Allow Permissions for all functionalities.",
         [    
           { text: "OK", onPress: () => console.log("OK Pressed") }
         ]
       )
 
       await delay(30000);
-      //console.log("awaiting");
+      
       requestUserPermission();
     }
   }
