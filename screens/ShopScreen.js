@@ -179,6 +179,7 @@ const ShopScreen = () => {
   };
   return (
     <ScrollView contentContainerStyle={{flex: 1}}>
+      
       <View style={styles.root}>
         {source1 && (
           <Image
@@ -237,8 +238,13 @@ const styles = StyleSheet.create({
     maxHeight: 170,
     alignItems: 'center',
     justifyContent: 'center',
+    
   },
-
+  title: {
+    fontSize: 22,
+    fontFamily: 'Futura',
+    padding: 50, 
+  },
   description: {
     fontFamily: 'Futura',
     fontStyle: 'italic',
