@@ -15,6 +15,7 @@ import {useNavigation} from '@react-navigation/native';
 import {firebase} from '@react-native-firebase/auth';
 import {useRoute} from '@react-navigation/native';
 import {Navigation} from 'react-native-navigation';
+import notifee, {AuthorizationStatus} from '@notifee/react-native';
 
 const ChooseInterval = () => {
   const {height} = useWindowDimensions();
