@@ -124,7 +124,7 @@ export default function App() {
     } else {
       console.log('User declined permissions');
       Alert.alert(
-        "You have declined Notification Permissions.",
+        "You have declined Notification Permissions 🥺",
         "Allow Permissions for all functionalities.",
         [    
           { text: "OK", onPress: () => console.log("OK Pressed") }
