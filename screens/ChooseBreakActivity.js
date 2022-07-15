@@ -20,7 +20,7 @@ const ChooseBreakActivity = () => {
     <ScrollView>
       <View style={styles.root}>
         <Text style={styles.title}>Some recommended activities for a</Text>
-        <Text style={styles.title}>               POWER BREAK!</Text>
+        <Text style={styles.title}>POWER BREAK!</Text>
         <Card>
           <Card.Title style={styles.fonts} h3>Meditation</Card.Title>
           <Card.Divider />
@@ -91,7 +91,7 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 22,
     fontFamily: 'Futura',
-   
+    textAlign: "center",
     padding: 10,
     justifyContent: 'center',
   },
