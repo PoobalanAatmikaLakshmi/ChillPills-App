@@ -17,12 +17,12 @@ import MainBackground from '../assets/MainBackground.png';
 import ChooseInterval from './ChooseInterval';
 import LoginScreen from './LoginScreen';
 
-import Casper from '../assets/Casper.png';
-import CasperBHome from '../assets/CasperBHome.png';
-import CasperRHome from '../assets/CasperRHome.png';
-import CasperPHome from '../assets/CasperPHome.png';
+import Casper from '../assets/Casper.png'; //standard
+import CasperBHome from '../assets/CasperBHome.png'; //basic
+import CasperRHome from '../assets/CasperRHome.png'; //Rare
+import CasperPHome from '../assets/CasperPHome.png'; //Prestige
 
-import Camo from '../assets/Camo.png';
+import Camo from '../assets/Camo.png'; //standard
 import CamoBHome from '../assets/CamoBHome.png';
 import CamoRHome from '../assets/CamoRHome.png';
 import CamoPHome from '../assets/CamoPHome.png';
@@ -139,7 +139,8 @@ const HomeScreen = () => {
           <Image
             source={source}
             style={[styles.badge, {height: height}]}
-            resizeMode="stretch"
+            resizeMode= "center"
+            alignItems = "center"
           />
         )}
         <Text> </Text>
@@ -200,5 +201,6 @@ const styles = StyleSheet.create({
     maxHeight: 250,
     alignItems: 'center',
     justifyContent: 'center',
+    marginHorizontal: 70,
   },
 });
