@@ -13,17 +13,24 @@ import SelectDropdown from 'react-native-select-dropdown';
 import CustomButton from '../Components/CustomButton';
 import {useNavigation} from '@react-navigation/native';
 import {firebase} from '@react-native-firebase/auth';
+import firestore from '@react-native-firebase/firestore';
 import {useRoute} from '@react-navigation/native';
 import {Navigation} from 'react-native-navigation';
-import notifee, {AuthorizationStatus, IntervalTrigger, TriggerType, TimeUnit} from '@notifee/react-native';
+import notifee, {
+  AuthorizationStatus,
+  IntervalTrigger,
+  TriggerType,
+  TimeUnit,
+} from '@notifee/react-native';
 
 const ChooseInterval = () => {
   const {height} = useWindowDimensions();
   //const route = useRoute();
   //const {userID} = route.params;
-  //let user = firebase.auth().currentUser;
-  const interval = ['25 minutes', '50 minutes', '90 minutes'];
+  let user = firebase.auth().currentUser;
+  const interval = [1, 25, 50, 90]; //1 minute for testing
   const navigation = useNavigation();
+  //logic: on button press, store interval in database (DONE), set trigger, display notif
   const onChosen = () => {
     navigation.navigate('Drawer', {screen: 'Home'});
     //console.warn("Go to Home Page")ss;
@@ -45,9 +52,16 @@ const ChooseInterval = () => {
       <SelectDropdown
         data={interval}
         onSelect={(selectedItem, index) => {
+          firestore()
+            .collection('users')
+            .doc(user.uid)
+            .update({breakinterval: selectedItem})
+            .then(() => {
+              console.log('Break Interval updated!');
+            });
           console.log(selectedItem, index);
         }}
-        defaultButtonText={' Please select desired interval'}
+        defaultButtonText={'Select duration (MINUTES)'}
         buttonTextAfterSelection={(selectedItem, index) => {
           return selectedItem;
         }}
@@ -64,14 +78,19 @@ const ChooseInterval = () => {
         rowStyle={styles.dropdown1RowStyle}
         rowTextStyle={styles.dropdown1RowTxtStyle}
       />
-     <Text> </Text>
-     <Text> </Text> 
-      <Text style={styles.description}>⏳ Hot Tip: Set it to 25 minutes to create</Text>
+      <Text> </Text>
+      <Text> </Text>
+      <Text style={styles.description}>minutes.</Text>
+      <Text> </Text>
+      <Text> </Text>
+      <Text style={styles.description}>
+        ⏳ Hot Tip: Set it to 25 minutes to create
+      </Text>
       <Text style={styles.description}>a Pomodoro study timer!</Text>
       <Text> </Text>
       <Text> </Text>
       <CustomButton text="Next" onPress={onChosen} />
-    </View> 
+    </View>
   );
 };
 export default ChooseInterval;
@@ -79,13 +98,13 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 23,
     fontFamily: 'Futura',
-    justifyContent: "center",
+    justifyContent: 'center',
   },
   description: {
     fontSize: 15,
     fontFamily: 'Futura',
     fontStyle: 'italic',
-    justifyContent: "center",
+    justifyContent: 'center',
   },
   dropdown1BtnStyle: {
     width: '90%',
