@@ -49,6 +49,22 @@ const HomeScreen = () => {
     navigation.navigate('ChooseBreakActivity');
     //BackgroundTimer.start();
   };
+  useEffect(() => {
+    const fieldPath = new firebase.firestore.FieldPath('chillCoins');
+    const using = firestore()
+      .collection('users')
+      .doc(user.uid)
+      .onSnapshot(documentSnapshot => {
+        console.log('User data: ', documentSnapshot.data());
+        const count = documentSnapshot.get(fieldPath);
+        console.log(count);
+        setCoins(count);
+      });
+
+    // Stop listening for updates when no longer required
+    return () => using();
+  });
+
   const getPetURL = petName => {
     if (petName === 'uninitialised') {
       return null;
@@ -138,7 +154,7 @@ const HomeScreen = () => {
         <Text> </Text>
 
         <View style={styles.bottom}>
-          <CustomButton text="chillcoins :" />
+          <Text chillcoins />
           <Button
             title="It's time to take a break!"
             onPress={onStartBreakPressed}
