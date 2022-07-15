@@ -2,7 +2,7 @@ import 'react-native-gesture-handler';
 import React, {useState, useEffect} from 'react';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
 import {useRoute} from '@react-navigation/native';
-import {Button} from 'react-native';
+import {Alert, Button} from 'react-native';
 import {NavigationContainer, useNavigation} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 import auth from '@react-native-firebase/auth';
@@ -19,7 +19,7 @@ import {firebase} from '@react-native-firebase/auth';
 import {Navigation} from 'react-native-navigation';
 import ChooseBreakActivity from './screens/ChooseBreakActivity';
 import ShopScreen from './screens/ShopScreen';
-
+import notifee, {AuthorizationStatus} from '@notifee/react-native';
 //This file will be executed 
 
 const Drawer = createDrawerNavigator();
@@ -109,6 +109,33 @@ function AppScreens() {
 // Handle user state changes
 
 export default function App() {
+  useEffect (() => {
+    requestUserPermission();
+  },[]);
+  
+  const delay = ms => new Promise(
+    resolve => setTimeout(resolve, ms)
+  );
+  async function requestUserPermission() {
+    const settings = await notifee.requestPermission();
+  
+    if (settings.authorizationStatus >= AuthorizationStatus.AUTHORIZED) {
+      console.log('Permission settings:', settings);
+    } else {
+      console.log('User declined permissions');
+      Alert.alert(
+        "You have declined Notification Permissions.",
+        "Allow Permissions to Continue",
+        [    
+          { text: "OK", onPress: () => console.log("OK Pressed") }
+        ]
+      )
+
+      await delay(30000);
+      //console.log("awaiting");
+      requestUserPermission();
+    }
+  }
   return (
     <SafeAreaProvider>
       <NavigationContainer>
