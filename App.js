@@ -131,7 +131,7 @@ export default function App() {
         ]
       )
 
-      await delay(30000);
+      await delay(20000);
       
       requestUserPermission();
     }
