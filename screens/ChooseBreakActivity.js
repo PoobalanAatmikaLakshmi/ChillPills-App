@@ -19,20 +19,19 @@ const ChooseBreakActivity = () => {
   return (
     <ScrollView>
       <View style={styles.root}>
-        <Text style={styles.title}>
-          Choose how you want to spend your break!
-        </Text>
+        <Text style={styles.title}>Some recommended activities for a</Text>
+        <Text style={styles.title}>               POWER BREAK!</Text>
         <Card>
-          <Card.Title style={styles.fonts} h3>
-            Meditation
-          </Card.Title>
+          <Card.Title style={styles.fonts} h3>Meditation</Card.Title>
           <Card.Divider />
           <Card.Image
             style={({padding: 5}, {width: 350}, {height: 300})}
             source={Meditation}
           />
-          <Text style={{marginBottom: 5}}>
-            Benefits of meditation are wide ranging
+          <Text style={styles.description}>
+            Benefits of meditation are wide ranging. Research published 
+            in Psychological Science found that a short meditative practice of 
+            merely 15 minutes can help you make better decisions!
           </Text>
           <CustomButton text="Choose" onPress={onChosen} />
         </Card>
@@ -45,8 +44,11 @@ const ChooseBreakActivity = () => {
             style={({padding: 5}, {width: 350}, {height: 310})}
             source={exercise}
           />
-          <Text style={{marginBottom: 10}}>
-            Exercise of any form boosts physical and mental health!
+          <Text style={styles.description}>
+            Exercise of any form boosts physical and mental health. You don't have to 
+            go out for a jog, just stand up, stretch and jog on the spot! Moving in spot just for 
+            10 minutes helps to improve posture, especially important when you are slouched over books and devices
+            all the time.
           </Text>
           <CustomButton text="Choose" onPress={onChosen} />
         </Card>
@@ -59,19 +61,23 @@ const ChooseBreakActivity = () => {
             style={({padding: 5}, {width: 350}, {height: 310})}
             source={sleep}
           />
-          <Text style={{marginBottom: 10}}>Sleeping is good for you</Text>
+          <Text style={styles.description}>You can get incredible benefits from 15 to 20 minutes of napping. 
+          You reset the system and get a burst of alertness and increased motor performance, 
+          getting that well-needed an energy boost.</Text>
           <CustomButton text="Choose" onPress={onChosen} />
         </Card>
         <Card>
           <Card.Title style={styles.fonts} h3>
-            Other Activities
+            Do Nothing. Head empty, no thoughts.
           </Card.Title>
           <Card.Divider />
           <Card.Image
             style={({padding: 5}, {width: 350}, {height: 310})}
             source={otheractivities}
           />
-          <Text style={{marginBottom: 10}}>Eye Break</Text>
+          <Text style={styles.description}>Or you could choose to daydream. 
+          Stare into space and admire the scenery or busy road below to stave off that eye-strain! 
+          Your eyes and imagination will thank you for it.</Text>
           <CustomButton text="Choose" onPress={onChosen} />
         </Card>
       </View>
@@ -85,10 +91,20 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 22,
     fontFamily: 'Futura',
+   
+    padding: 10,
+    justifyContent: 'center',
   },
   fonts: {
     fontFamily: 'Futura',
     fontStyle: 'italic',
+  },
+
+  description: {
+    fontFamily: 'Futura',
+    justifyContent: 'center',
+    fontSize: 15,
+    marginBottom: 5,
   },
 
   root: {
