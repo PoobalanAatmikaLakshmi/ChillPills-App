@@ -20,7 +20,7 @@ import {Navigation} from 'react-native-navigation';
 import ChooseBreakActivity from './screens/ChooseBreakActivity';
 import ShopScreen from './screens/ShopScreen';
 import notifee, {AuthorizationStatus} from '@notifee/react-native';
-//This file will be executed 
+//This file will be executed
 
 const Drawer = createDrawerNavigator();
 const AppStack = createStackNavigator();
@@ -42,7 +42,7 @@ function MyDrawer() {
       <Drawer.Screen
         name="Home"
         component={HomeScreen}
-       // initialParams={{userID: user.uid}}
+        // initialParams={{userID: user.uid}}
         onPress
         options={{
           headerRight: () => (
@@ -55,7 +55,7 @@ function MyDrawer() {
       <Drawer.Screen
         name="Shop"
         component={ShopScreen}
-       // initialParams={{userID: user.uid}}
+        // initialParams={{userID: user.uid}}
         options={{
           headerRight: () => (
             <Button
@@ -84,17 +84,17 @@ function AppScreens() {
       <AppStack.Screen
         name="Choose A Pet!"
         component={ChoosePetScreen}
-       // initialParams={{userID: user.uid}}
+        // initialParams={{userID: user.uid}}
       />
       <AppStack.Screen
         name="Break Timer"
         component={BreakTimer}
-       // initialParams={{userID: user.uid}}
+        // initialParams={{userID: user.uid}}
       />
       <AppStack.Screen
         name="ChooseBreakActivity"
         component={ChooseBreakActivity}
-       // initialParams={{userID: user.uid}}
+        // initialParams={{userID: user.uid}}
       />
 
       <AppStack.Screen
@@ -109,30 +109,26 @@ function AppScreens() {
 // Handle user state changes
 
 export default function App() {
-  useEffect (() => {
+  useEffect(() => {
     requestUserPermission();
-  },[]);
-  
-  const delay = ms => new Promise(
-    resolve => setTimeout(resolve, ms)
-  );
+  }, []);
+
+  const delay = ms => new Promise(resolve => setTimeout(resolve, ms));
   async function requestUserPermission() {
     const settings = await notifee.requestPermission();
-  
+
     if (settings.authorizationStatus >= AuthorizationStatus.AUTHORIZED) {
       console.log('Permission settings:', settings);
     } else {
       console.log('User declined permissions');
       Alert.alert(
-        "You have declined Notification Permissions 🥺",
-        "Allow Permissions for all functionalities.",
-        [    
-          { text: "OK", onPress: () => console.log("OK Pressed") }
-        ]
-      )
+        'You have declined Notification Permissions 🥺',
+        'Allow Permissions for all functionalities.',
+        [{text: 'OK', onPress: () => console.log('OK Pressed')}],
+      );
 
       await delay(20000);
-      
+
       requestUserPermission();
     }
   }
