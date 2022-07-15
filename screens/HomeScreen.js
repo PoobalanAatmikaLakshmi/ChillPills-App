@@ -113,8 +113,6 @@ const HomeScreen = () => {
     return () => subscriber();
   });
 
-
-
   //text="It is time for a break!"
   //onPress={onStartBreakPressed}
   return (
@@ -146,8 +144,8 @@ const HomeScreen = () => {
           <Image
             source={source}
             style={[styles.badge, {height: height}]}
-            resizeMode= "center"
-            alignItems = "center"
+            resizeMode="center"
+            alignItems="center"
           />
         )}
         <Text> </Text>
@@ -155,7 +153,7 @@ const HomeScreen = () => {
         <Text> </Text>
 
         <View style={styles.bottom}>
-          
+          <Text style={styles.description}>ChillCoins: {coins}</Text>
           <Button
             title="Time for a Break!"
             onPress={onStartBreakPressed}
@@ -209,5 +207,9 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     marginHorizontal: 70,
+  },
+  description: {
+    fontFamily: 'Futura',
+    fontStyle: 'italic',
   },
 });
