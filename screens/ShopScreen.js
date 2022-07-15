@@ -51,37 +51,46 @@ const ShopScreen = () => {
   };
 
   useEffect(() => {
-    const func = async () => {
-      const User = await firestore().collection('users').doc(user.uid).get();
-      console.log(User);
-      if (
-        User._data.petimage === 'Cuincy' ||
-        User._data.petimage === 'CuincyB' ||
-        User._data.petimage === 'CuincyP' ||
-        User._data.petimage === 'CuincyR'
-      ) {
-        getCuincyURL();
-        //console.log(userID);
-      } else if (
-        User._data.petimage === 'Casper' ||
-        User._data.petimage === 'CasperB' ||
-        User._data.petimage === 'CasperP' ||
-        User._data.petimage === 'CasperR'
-      ) {
-        getCasperURL();
-        //console.log(user);
-      } else if (
-        User._data.petimage === 'Camo' ||
-        User._data.petimage === 'CamoB' ||
-        User._data.petimage === 'CamoP' ||
-        User._data.petimage === 'CamoR'
-      ) {
-        getCamoURL();
-        //console.log(source);
-      }
-    };
-    func();
+    const fieldPath = new firebase.firestore.FieldPath('petimage');
+    const subscriber = firestore()
+      .collection('users')
+      .doc(user.uid)
+      .onSnapshot(documentSnapshot => {
+        console.log('User data: ', documentSnapshot.data());
+        const pet = documentSnapshot.get(fieldPath);
+        console.log(pet);
+
+        //const User = await firestore().collection('users').doc(user.uid).get();
+        //console.log(User);
+        if (
+          pet === 'Cuincy' ||
+          pet === 'CuincyB' ||
+          pet === 'CuincyP' ||
+          pet === 'CuincyR'
+        ) {
+          getCuincyURL();
+          //console.log(userID);
+        } else if (
+          pet === 'Casper' ||
+          pet === 'CasperB' ||
+          pet === 'CasperP' ||
+          pet === 'CasperR'
+        ) {
+          getCasperURL();
+          //console.log(user);
+        } else if (
+          pet === 'Camo' ||
+          pet === 'CamoB' ||
+          pet === 'CamoP' ||
+          pet === 'CamoR'
+        ) {
+          getCamoURL();
+          //console.log(source);
+        }
+      });
+    return () => subscriber();
   });
+
   const updateSkinB = source => {
     if (source === CuincyB) {
       firestore()

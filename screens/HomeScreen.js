@@ -82,31 +82,22 @@ const HomeScreen = () => {
   };
 
   useEffect(() => {
-    const func = async () => {
-      const User = await firestore().collection('users').doc(user.uid).get();
-      setSource(getPetURL(User._data.petimage));
-      console.log(User);
-      console.log(source);
-    };
+    const fieldPath = new firebase.firestore.FieldPath('petimage');
+    const subscriber = firestore()
+      .collection('users')
+      .doc(user.uid)
+      .onSnapshot(documentSnapshot => {
+        console.log('User data: ', documentSnapshot.data());
+        const pet = documentSnapshot.get(fieldPath);
+        console.log(pet);
+        setSource(getPetURL(pet));
+      });
 
-    func();
-  });
-
-  /* useEffect(() => {
-    const getcoins = async () => {
-      await firestore()
-        .collection('Users')
-        .doc(user.uid)
-        .onSnapshot(documentSnapshot => {
-          const coinCount = documentSnapshot.get(user.uid.chillCoins);
-          setCoins(coinCount);
-        });
-    };
-    getcoins();
     // Stop listening for updates when no longer required
-    //return () => subscriber();
+    return () => subscriber();
   });
-  */
+
+
 
   //text="It is time for a break!"
   //onPress={onStartBreakPressed}
