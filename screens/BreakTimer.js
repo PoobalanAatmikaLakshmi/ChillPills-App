@@ -10,7 +10,7 @@ const BreakTimer = () => {
   const onselected = () => {
     console.warn('Go to Music Page');
   };
-  const [secondsLeft, setSecondsLeft] = useState(30);
+  const [secondsLeft, setSecondsLeft] = useState(3);
   const [secondsRemaining, setSecondsRemaining] = useState();
   const [timerOn, setTimerOn] = useState(false);
   //const route = useRoute();
@@ -75,7 +75,7 @@ const BreakTimer = () => {
   const handleInput = text => {
     const currValue = parseInt(text, 10);
     if (currValue < 600) {
-      setSecondsLeft(30);
+      setSecondsLeft(3);
     } else if (currValue > 1800) {
       setSecondsLeft(1800);
     } else if (isNaN(currValue)) {
