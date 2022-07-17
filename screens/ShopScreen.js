@@ -152,6 +152,7 @@ const ShopScreen = () => {
         .update({petimage: 'CuincyR'})
         .then(() => {
           console.log('New skin updated!');
+          navigation.navigate('Home');
         });
     } else if (source === CasperR) {
       firestore()
@@ -169,6 +170,7 @@ const ShopScreen = () => {
         .update({petimage: 'CamoR'})
         .then(() => {
           console.log('New skin updated!');
+          navigation.navigate('Home');
           //const user = firestore().collection('users').doc(userID).get();
           //console.log(user);
         });
@@ -184,6 +186,7 @@ const ShopScreen = () => {
         .update({petimage: 'CuincyP'})
         .then(() => {
           console.log('New skin updated!');
+          navigation.navigate('Home');
         });
     } else if (source === CasperP) {
       firestore()
@@ -192,6 +195,7 @@ const ShopScreen = () => {
         .update({petimage: 'CasperP'})
         .then(() => {
           console.log('New skin updated!');
+          navigation.navigate('Home');
         });
     } else if (source === CamoP) {
       firestore()
@@ -200,6 +204,7 @@ const ShopScreen = () => {
         .update({petimage: 'CamoP'})
         .then(() => {
           console.log('New skin updated!');
+          navigation.navigate('Home');
           //const user = firestore().collection('users').doc(userID).get();
           //console.log(user);
         });
