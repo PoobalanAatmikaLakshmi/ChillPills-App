@@ -23,8 +23,8 @@ const ChoosePetScreen = () => {
   const {height} = useWindowDimensions();
   const navigation = useNavigation();
   let user = firebase.auth().currentUser;
-  //const route = useRoute();
-  //const {userID} = route.params;
+  const route = useRoute();
+  const {fromShop} = route.params;
   const onChosen1 = () => {
     firestore()
       .collection('users')
@@ -33,9 +33,13 @@ const ChoosePetScreen = () => {
       .then(() => {
         console.log('Pet updated!');
       });
-    navigation.navigate('Drawer', {
-      screen: 'Change break frequency',
-    });
+    if (fromShop === 'true') {
+      navigation.navigate('Drawer', {screen: 'Home'});
+    } else {
+      navigation.navigate('Drawer', {
+        screen: 'Change break frequency',
+      });
+    }
   };
   const onChosen2 = () => {
     firestore()
@@ -45,9 +49,13 @@ const ChoosePetScreen = () => {
       .then(() => {
         console.log('Pet updated!');
       });
-    navigation.navigate('Drawer', {
-      screen: 'Change break frequency',
-    });
+    if (fromShop === 'true') {
+      navigation.navigate('Drawer', {screen: 'Home'});
+    } else {
+      navigation.navigate('Drawer', {
+        screen: 'Change break frequency',
+      });
+    }
   };
   const onChosen3 = () => {
     firestore()
@@ -57,9 +65,13 @@ const ChoosePetScreen = () => {
       .then(() => {
         console.log('Pet updated!');
       });
-    navigation.navigate('Drawer', {
-      screen: 'Change break frequency',
-    });
+    if (fromShop === 'true') {
+      navigation.navigate('Drawer', {screen: 'Home'});
+    } else {
+      navigation.navigate('Drawer', {
+        screen: 'Change break frequency',
+      });
+    }
   };
 
   return (

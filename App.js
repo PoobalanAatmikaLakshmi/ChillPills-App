@@ -32,7 +32,7 @@ function MyDrawer() {
     navigation.navigate('Login');
   };
   const onchangepetpressed = () => {
-    navigation.navigate('Choose A Pet!');
+    navigation.navigate('Choose A Pet!', {fromShop: 'true'});
   };
   return (
     //add shop screen later
