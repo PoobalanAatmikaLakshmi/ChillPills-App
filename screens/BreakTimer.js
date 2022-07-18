@@ -10,7 +10,7 @@ const BreakTimer = () => {
   const onselected = () => {
     console.warn('Go to Music Page');
   };
-  const [secondsLeft, setSecondsLeft] = useState(3);
+  const [secondsLeft, setSecondsLeft] = useState(600);
   const [secondsRemaining, setSecondsRemaining] = useState();
   const [timerOn, setTimerOn] = useState(false);
   //const route = useRoute();
@@ -75,7 +75,7 @@ const BreakTimer = () => {
   const handleInput = text => {
     const currValue = parseInt(text, 10);
     if (currValue < 600) {
-      setSecondsLeft(3);
+      setSecondsLeft(600);
     } else if (currValue > 1800) {
       setSecondsLeft(1800);
     } else if (isNaN(currValue)) {
@@ -107,18 +107,23 @@ const BreakTimer = () => {
       />
       <Text> </Text>
       <Text> </Text>
-      <Text> </Text>
       <Text style={styles.title}> It is time to unwind 🥳: </Text>
       <Text> </Text>
       <Text style={styles.timer}>
         {' '}
         {clockify().displayMins} Mins {clockify().displaySecs} Secs{' '}
       </Text>
-
+      <Text style={styles.description}>
+        ⏳ Hot Tip: Set it between 10-17 minutes for double the amount of
+        chillcoins per min! Remember that 30 minutes at a time is the maximum
+        duration recommended.
+      </Text>
       <CustomButton
         text="Start/Stop"
         onPress={() => setTimerOn(current => !current)}
       />
+      <Text> </Text>
+      <Text> </Text>
       <Text> </Text>
       <Text> </Text>
       <Text> </Text>
