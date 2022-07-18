@@ -1,5 +1,5 @@
 import React, {useState, useEffect, useRoute} from 'react';
-import {View, Text, Button, StyleSheet, Input} from 'react-native';
+import {View, Text, Button, StyleSheet, Input, Alert} from 'react-native';
 import CustomInput from '../Components/CustomInput';
 import CustomButton from '../Components/CustomButton';
 import {useNavigation} from '@react-navigation/native';
@@ -19,39 +19,45 @@ const SignUpScreen = () => {
   const onRegisterPressed = async () => {
     //console.warn("Register");
     //will work
-
-    await firebase
-      .auth()
-      .createUserWithEmailAndPassword(email, password)
-      .then(response => {
-        const uid = response.user.uid;
-        const data = {
-          id: uid,
-          email,
-          fullName,
-          petimage: 'uninitialized',
-          chillCoins: 0,
-        };
-        const usersRef = firestore().collection('users');
-        usersRef
-          .doc(uid)
-          .set(data)
-          .then(() => {
-            navigation.navigate('Login');
-          })
-          .catch(error => {
-            alert(error);
-          });
-      })
-      .catch(error => {
-        alert(error);
-      });
+    if (password === passwordRepeat) {
+      await firebase
+        .auth()
+        .createUserWithEmailAndPassword(email, password)
+        .then(response => {
+          const uid = response.user.uid;
+          const data = {
+            id: uid,
+            email,
+            fullName,
+            petimage: 'uninitialized',
+            chillCoins: 0,
+          };
+          const usersRef = firestore().collection('users');
+          usersRef
+            .doc(uid)
+            .set(data)
+            .then(() => {
+              navigation.navigate('Login');
+            })
+            .catch(error => {
+              alert(error);
+            });
+        })
+        .catch(error => {
+          alert(error);
+        });
+    } else {
+      buttonAlert();
+    }
   };
   const onLoginPressed = () => {
     //console.warn("Redirecting to Login Page");
     navigation.navigate('Login');
   };
-
+  const buttonAlert = () =>
+    Alert.alert('Warning', 'Password and Reset Password do not match!', [
+      {text: 'Ok', onPress: () => console.log('OK Pressed')},
+    ]);
   return (
     <View style={styles.root}>
       <Text style={styles.title}>Create An Account</Text>

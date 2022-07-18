@@ -206,16 +206,9 @@ const ShopScreen = () => {
     Alert.alert(
       'Warning',
       'Insufficient ChillCoins! Develop a more consistent break routine to earn more!',
-      [
-        {
-          text: 'Cancel',
-          onPress: () => console.log('Cancel Pressed'),
-          style: 'cancel',
-        },
-        {text: 'Ok', onPress: () => console.log('OK Pressed')},
-      ],
+      [{text: 'Ok', onPress: () => console.log('OK Pressed')}],
     );
-  const deductCoins = async (number) => {
+  const deductCoins = async number => {
     await firestore()
       .collection('users')
       .doc(user.uid)
