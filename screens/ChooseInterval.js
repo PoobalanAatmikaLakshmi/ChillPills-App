@@ -40,19 +40,35 @@ const ChooseInterval = () => {
 
   useEffect(() => {
     const path = new firebase.firestore.FieldPath('breakinterval');
+    const getInterval = firestore()
+      .collection('users')
+      .doc(user.uid)
+      .onSnapshot(documentSnapshot => {
+        setMins(documentSnapshot.get(path));
+      });
+
+    return () => getInterval();
+  });
+  async function onCreateTriggerNotification() {
+    //const date = new Date(Date.now());
+    //date.setHours(11);
+    //date.setMinutes(10);
+    console.log('running');
     const trigger: IntervalTrigger = {
       type: TriggerType.INTERVAL,
-      interval: firestore()
-        .collection('users')
-        .doc(user.uid)
-        .onSnapshot(documentSnapshot => {
-          const min = documentSnapshot.get(path);
-          setMins(min);
-        }),
+      interval: min,
       timeUnit: TimeUnit.MINUTES,
     };
-  });
-  
+
+    // Create a trigger notification
+    await notifee.createTriggerNotification(
+      {
+        title: 'ChillPills',
+        body: 'Time to take a break',
+      },
+      trigger,
+    );
+  }
   return (
     <View style={styles.root}>
       <Text> </Text>
@@ -79,6 +95,7 @@ const ChooseInterval = () => {
               console.log(min);
             });
           console.log(selectedItem, index);
+          onCreateTriggerNotification();
         }}
         defaultButtonText={'Select duration (MINUTES)'}
         buttonTextAfterSelection={(selectedItem, index) => {
@@ -147,3 +164,4 @@ const styles = StyleSheet.create({
     backgroundColor: '#FCF6E2',
   },
 });
+
