@@ -121,6 +121,7 @@ const HomeScreen = () => {
         source={MainBackground}
         resizeMode="cover"
         style={{width: '100%', height: '100%'}}>
+        <Text style={styles.title}>ChillCoins: {coins}</Text>
         <Text> </Text>
         <Text> </Text>
         <Text> </Text>
@@ -153,7 +154,6 @@ const HomeScreen = () => {
         <Text> </Text>
 
         <View style={styles.bottom}>
-          <Text style={styles.description}>ChillCoins: {coins}</Text>
           <Button
             title="Time for a Break!"
             onPress={onStartBreakPressed}
@@ -211,5 +211,9 @@ const styles = StyleSheet.create({
   description: {
     fontFamily: 'Futura',
     fontStyle: 'italic',
+  },
+  title: {
+    fontSize: 22,
+    fontFamily: 'Futura',
   },
 });
