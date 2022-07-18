@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   View,
   Text,
@@ -35,6 +35,24 @@ const ChooseInterval = () => {
     navigation.navigate('Drawer', {screen: 'Home'});
     //console.warn("Go to Home Page")ss;
   };
+
+  const [min, setMins] = useState();
+
+  useEffect(() => {
+    const path = new firebase.firestore.FieldPath('breakinterval');
+    const trigger: IntervalTrigger = {
+      type: TriggerType.INTERVAL,
+      interval: firestore()
+        .collection('users')
+        .doc(user.uid)
+        .onSnapshot(documentSnapshot => {
+          const min = documentSnapshot.get(path);
+          setMins(min);
+        }),
+      timeUnit: TimeUnit.MINUTES,
+    };
+  });
+  
   return (
     <View style={styles.root}>
       <Text> </Text>
@@ -58,6 +76,7 @@ const ChooseInterval = () => {
             .update({breakinterval: selectedItem})
             .then(() => {
               console.log('Break Interval updated!');
+              console.log(min);
             });
           console.log(selectedItem, index);
         }}
