@@ -1,5 +1,5 @@
-import React, {useState, useEffect, useRoute} from 'react';
-import {View, Text, Button, StyleSheet, Input} from 'react-native';
+import React, {useState} from 'react';
+import {View, Text, StyleSheet} from 'react-native';
 import CustomInput from '../Components/CustomInput';
 import CustomButton from '../Components/CustomButton';
 import {useNavigation} from '@react-navigation/native';
@@ -17,9 +17,6 @@ const SignUpScreen = () => {
   const navigation = useNavigation();
 
   const onRegisterPressed = async () => {
-    //console.warn("Register");
-    //will work
-
     await firebase
       .auth()
       .createUserWithEmailAndPassword(email, password)
@@ -48,7 +45,6 @@ const SignUpScreen = () => {
       });
   };
   const onLoginPressed = () => {
-    //console.warn("Redirecting to Login Page");
     navigation.navigate('Login');
   };
 
@@ -93,7 +89,6 @@ const styles = StyleSheet.create({
   root: {
     flex: 1,
     alignItems: 'center',
-    //justifyContent: 'center',
     padding: 50,
     backgroundColor: '#FCF6E2',
   },

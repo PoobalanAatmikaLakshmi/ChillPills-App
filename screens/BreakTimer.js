@@ -3,20 +3,13 @@ import {View, Text, StyleSheet, Linking} from 'react-native';
 import CustomButton from '../Components/CustomButton';
 import BackgroundTimer from 'react-native-background-timer';
 import CustomInput from '../Components/CustomInput';
-import {useRoute} from '@react-navigation/native';
 import firestore from '@react-native-firebase/firestore';
 import {firebase} from '@react-native-firebase/auth';
 const BreakTimer = () => {
-  const onselected = () => {
-    console.warn('Go to Music Page');
-  };
   const [secondsLeft, setSecondsLeft] = useState(30);
   const [secondsRemaining, setSecondsRemaining] = useState();
   const [timerOn, setTimerOn] = useState(false);
-  //const route = useRoute();
-  //const {userID} = route.params;
   let user = firebase.auth().currentUser;
-  // Runs when timerOn value changes to start or stop timer
   useEffect(() => {
     if (timerOn) {
       startTimer();
@@ -27,7 +20,6 @@ const BreakTimer = () => {
     return () => {
       BackgroundTimer.stopBackgroundTimer();
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [timerOn]);
 
   useEffect(() => {
@@ -48,7 +40,7 @@ const BreakTimer = () => {
 
       console.log('added coins');
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+
   }, [secondsLeft]);
 
   const startTimer = () => {
@@ -142,7 +134,6 @@ const styles = StyleSheet.create({
     fontFamily: 'Futura',
     flexDirection: 'row',
     flexWrap: 'wrap',
-    //textAlign : 'justify'
   },
 
   timer: {

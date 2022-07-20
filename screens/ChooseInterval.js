@@ -1,20 +1,10 @@
 import React, {useEffect, useState} from 'react';
-import {
-  View,
-  Text,
-  Button,
-  StyleSheet,
-  Image,
-  useWindowDimensions,
-  ScrollView,
-} from 'react-native';
+import {View, Text, StyleSheet} from 'react-native';
 import SelectDropdown from 'react-native-select-dropdown';
 import CustomButton from '../Components/CustomButton';
 import {useNavigation} from '@react-navigation/native';
 import {firebase} from '@react-native-firebase/auth';
 import firestore from '@react-native-firebase/firestore';
-import {useRoute} from '@react-navigation/native';
-import {Navigation} from 'react-native-navigation';
 import notifee, {
   IntervalTrigger,
   TriggerType,
@@ -145,4 +135,3 @@ const styles = StyleSheet.create({
     backgroundColor: '#FCF6E2',
   },
 });
-

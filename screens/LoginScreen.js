@@ -1,22 +1,11 @@
-import React, {useState, useEffect} from 'react';
-import {
-  View,
-  Text,
-  Button,
-  StyleSheet,
-  Image,
-  useWindowDimensions,
-  Input,
-} from 'react-native';
+import React, {useState} from 'react';
+import {View, StyleSheet, Image, useWindowDimensions} from 'react-native';
 import Logo from '../assets/loginLogo.png';
 import CustomInput from '../Components/CustomInput';
 import CustomButton from '../Components/CustomButton';
 import {useNavigation} from '@react-navigation/native';
 import auth from '@react-native-firebase/auth';
-import firestore from '@react-native-firebase/firestore';
 import {firebase} from '@react-native-firebase/auth';
-//for users with exisiting accounts
-//const usersCollection = firestore().collection('Users');
 
 const LoginScreen = () => {
   const [email, setEmail] = useState('');
@@ -64,12 +53,10 @@ const LoginScreen = () => {
       });
   };
   const onForgetPressed = () => {
-    //console.warn("Forgot Password");
     navigation.navigate('ResetPasswordScreen');
   };
 
   const onSignUpPressed = () => {
-    //console.warn("Redirecting to Sign Up Page");
     navigation.navigate('Sign Up');
   };
 
@@ -111,9 +98,7 @@ export default LoginScreen;
 
 const styles = StyleSheet.create({
   root: {
-    //flex: 1,
     alignItems: 'center',
-    //justifyContent: 'center',
     padding: 50,
     backgroundColor: '#FCF6E2',
   },
