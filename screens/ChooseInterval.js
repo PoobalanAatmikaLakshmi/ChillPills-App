@@ -9,7 +9,6 @@ import {
   ScrollView,
 } from 'react-native';
 import SelectDropdown from 'react-native-select-dropdown';
-//import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import CustomButton from '../Components/CustomButton';
 import {useNavigation} from '@react-navigation/native';
 import {firebase} from '@react-native-firebase/auth';
@@ -17,27 +16,14 @@ import firestore from '@react-native-firebase/firestore';
 import {useRoute} from '@react-navigation/native';
 import {Navigation} from 'react-native-navigation';
 import notifee, {
-  AuthorizationStatus,
   IntervalTrigger,
   TriggerType,
   TimeUnit,
 } from '@notifee/react-native';
 
 const ChooseInterval = () => {
-  const {height} = useWindowDimensions();
-  //const route = useRoute();
-  //const {userID} = route.params;
   let user = firebase.auth().currentUser;
-  const interval = [1, 25, 50, 90]; //1 minute for testing
-  const navigation = useNavigation();
-  //logic: on button press, store interval in database (DONE), set trigger, display notif
-  const onChosen = () => {
-    navigation.navigate('Drawer', {screen: 'Home'});
-    //console.warn("Go to Home Page")ss;
-  };
-
   const [min, setMins] = useState();
-
   useEffect(() => {
     const path = new firebase.firestore.FieldPath('breakinterval');
     const getInterval = firestore()
@@ -46,25 +32,25 @@ const ChooseInterval = () => {
       .onSnapshot(documentSnapshot => {
         setMins(documentSnapshot.get(path));
       });
-
     return () => getInterval();
   });
+  const interval = [25, 50, 90];
+  const navigation = useNavigation();
+  const onChosen = () => {
+    navigation.navigate('Drawer', {screen: 'Home'});
+  };
+  //create notifications that go off based on selected interval
   async function onCreateTriggerNotification() {
-    //const date = new Date(Date.now());
-    //date.setHours(11);
-    //date.setMinutes(10);
     console.log('running');
     const trigger: IntervalTrigger = {
       type: TriggerType.INTERVAL,
       interval: min,
       timeUnit: TimeUnit.MINUTES,
     };
-
-    // Create a trigger notification
     await notifee.createTriggerNotification(
       {
         title: 'ChillPills',
-        body: 'Time to take a break',
+        body: 'Time to take a break!',
       },
       trigger,
     );
@@ -106,10 +92,6 @@ const ChooseInterval = () => {
         }}
         buttonStyle={styles.dropdown1BtnStyle}
         buttonTextStyle={styles.dropdown1BtnTxtStyle}
-        //renderDropdownIcon={isOpened => {
-        //  return <FontAwesomeIcon name={isOpened ? 'chevron-up' : 'chevron-down'} color={'#444'} size={30} />;
-
-        //dropdownIconPosition={'right'}
         dropdownStyle={styles.dropdown1DropdownStyle}
         rowStyle={styles.dropdown1RowStyle}
         rowTextStyle={styles.dropdown1RowTxtStyle}
@@ -159,7 +141,6 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     textAlign: 'justify',
-    //justifyContent: 'center',
     padding: 40,
     backgroundColor: '#FCF6E2',
   },
