@@ -33,9 +33,6 @@ const ShopScreen = () => {
   //const {userID} = route.params;
   //const userid = route.initialParams.id;
   const [coins, setCoins] = useState();
-  const [redeemedB, setRedeemedB] = useState(false);
-  const [redeemedP, setRedeemedP] = useState(false);
-  const [redeemedR, setRedeemedR] = useState(false);
   const [source1, setSource1] = useState();
   const [source2, setSource2] = useState();
   const [source3, setSource3] = useState();
@@ -54,7 +51,6 @@ const ShopScreen = () => {
     setSource2(CamoR);
     setSource3(CamoP);
   };
-
   useEffect(() => {
     const fieldPath = new firebase.firestore.FieldPath('chillCoins');
     const using = firestore()
@@ -152,7 +148,6 @@ const ShopScreen = () => {
         .update({petimage: 'CuincyR'})
         .then(() => {
           console.log('New skin updated!');
-          navigation.navigate('Home');
         });
     } else if (source === CasperR) {
       firestore()
@@ -170,7 +165,6 @@ const ShopScreen = () => {
         .update({petimage: 'CamoR'})
         .then(() => {
           console.log('New skin updated!');
-          navigation.navigate('Home');
           //const user = firestore().collection('users').doc(userID).get();
           //console.log(user);
         });
@@ -186,7 +180,6 @@ const ShopScreen = () => {
         .update({petimage: 'CuincyP'})
         .then(() => {
           console.log('New skin updated!');
-          navigation.navigate('Home');
         });
     } else if (source === CasperP) {
       firestore()
@@ -195,7 +188,6 @@ const ShopScreen = () => {
         .update({petimage: 'CasperP'})
         .then(() => {
           console.log('New skin updated!');
-          navigation.navigate('Home');
         });
     } else if (source === CamoP) {
       firestore()
@@ -204,7 +196,6 @@ const ShopScreen = () => {
         .update({petimage: 'CamoP'})
         .then(() => {
           console.log('New skin updated!');
-          navigation.navigate('Home');
           //const user = firestore().collection('users').doc(userID).get();
           //console.log(user);
         });
@@ -228,24 +219,18 @@ const ShopScreen = () => {
   };
 
   const manageCoinsB = source => {
-    //if (!redeemed) {
     if (coins >= 1) {
       deductCoins(1);
       updateSkinB(source);
-      setRedeemedB(true);
     } else {
       buttonAlert();
       //console.alert('insufficient chillcoins');
     }
-    // } else {
-    //  updateSkinB(source);
-    // }
   };
   const manageCoinsR = source => {
     if (coins >= 2) {
       deductCoins(2);
       updateSkinR(source);
-      setRedeemedR(true);
     } else {
       buttonAlert();
       //console.alert('insufficient chillcoins');
@@ -256,20 +241,15 @@ const ShopScreen = () => {
     if (coins >= 3) {
       deductCoins(3);
       updateSkinP(source);
-      setRedeemedP(true);
     } else {
       buttonAlert();
       //console.alert('insufficient chillcoins');
     }
   };
-  useEffect(() => {
-    setRedeemedB(false);
-    setRedeemedP(false);
-    setRedeemedR(false);
-  }, [source1]);
   return (
-    <ScrollView contentContainerStyle={{flex: 1}}>
+    <ScrollView>
       <View style={styles.root}>
+        <Text style={styles.title}>💰ChillCoins: {coins}💰</Text>
         {source1 && (
           <Image
             source={source1}
@@ -278,15 +258,10 @@ const ShopScreen = () => {
           />
         )}
         <Text style={styles.description}>🪙 Budget 🪙</Text>
-        {!redeemedB && (
-          <CustomButton
-            text="100 ChillCoins"
-            onPress={() => manageCoinsB(source1)}
-          />
-        )}
-        {redeemedB && (
-          <CustomButton text="Choose" onPress={() => updateSkinB(source1)} />
-        )}
+        <CustomButton
+          text="100 ChillCoins"
+          onPress={() => manageCoinsB(source1)}
+        />
         {source2 && (
           <Image
             source={source2}
@@ -295,15 +270,10 @@ const ShopScreen = () => {
           />
         )}
         <Text style={styles.description}>💵 Rare 💵</Text>
-        {!redeemedR && (
-          <CustomButton
-            text="500 ChillCoins"
-            onPress={() => manageCoinsR(source2)}
-          />
-        )}
-        {redeemedR && (
-          <CustomButton text="Choose" onPress={() => updateSkinR(source2)} />
-        )}
+        <CustomButton
+          text="500 ChillCoins"
+          onPress={() => manageCoinsR(source2)}
+        />
         {source3 && (
           <Image
             source={source3}
@@ -312,15 +282,10 @@ const ShopScreen = () => {
           />
         )}
         <Text style={styles.description}>💎 Prestige 💎</Text>
-        {!redeemedP && (
-          <CustomButton
-            text="1500 ChillCoins"
-            onPress={() => manageCoinsP(source3)}
-          />
-        )}
-        {redeemedP && (
-          <CustomButton text="Choose" onPress={() => updateSkinP(source3)} />
-        )}
+        <CustomButton
+          text="1500 Chillcoins"
+          onPress={() => manageCoinsP(source3)}
+        />
       </View>
     </ScrollView>
   );
@@ -332,7 +297,7 @@ const styles = StyleSheet.create({
   root: {
     flex: 1,
     alignItems: 'center',
-    justifyContent: 'center',
+    //justifyContent: 'center',
     padding: 50,
     backgroundColor: '#FCF6E2',
   },
@@ -344,9 +309,10 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   title: {
-    fontSize: 22,
+    fontSize: 20,
     fontFamily: 'Futura',
-    padding: 50,
+    padding: 10,
+    //textAlign: 'right',
   },
   description: {
     fontFamily: 'Futura',
