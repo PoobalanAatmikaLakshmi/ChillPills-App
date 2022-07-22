@@ -1,8 +1,7 @@
-import React, {useState, useEffect} from 'react';
+import React from 'react';
 import {
   View,
   Text,
-  Button,
   StyleSheet,
   Image,
   useWindowDimensions,
@@ -14,7 +13,6 @@ import {useNavigation} from '@react-navigation/native';
 import CasperBadge from '../assets/CasperBadge.png';
 import CamoBadge from '../assets/CamoBadge.png';
 import CuincyBadge from '../assets/CuincyBadge.png';
-import {Navigation} from 'react-native-navigation';
 import firestore from '@react-native-firebase/firestore';
 import {firebase} from '@react-native-firebase/auth';
 import {useRoute} from '@react-navigation/native';
@@ -23,8 +21,8 @@ const ChoosePetScreen = () => {
   const {height} = useWindowDimensions();
   const navigation = useNavigation();
   let user = firebase.auth().currentUser;
-  //const route = useRoute();
-  //const {userID} = route.params;
+  const route = useRoute();
+  const {fromShop} = route.params;
   const onChosen1 = () => {
     firestore()
       .collection('users')
@@ -33,9 +31,13 @@ const ChoosePetScreen = () => {
       .then(() => {
         console.log('Pet updated!');
       });
-    navigation.navigate('Drawer', {
-      screen: 'Change break frequency',
-    });
+    if (fromShop === 'true') {
+      navigation.navigate('Drawer', {screen: 'Home'});
+    } else {
+      navigation.navigate('Drawer', {
+        screen: 'Change break frequency',
+      });
+    }
   };
   const onChosen2 = () => {
     firestore()
@@ -45,9 +47,13 @@ const ChoosePetScreen = () => {
       .then(() => {
         console.log('Pet updated!');
       });
-    navigation.navigate('Drawer', {
-      screen: 'Change break frequency',
-    });
+    if (fromShop === 'true') {
+      navigation.navigate('Drawer', {screen: 'Home'});
+    } else {
+      navigation.navigate('Drawer', {
+        screen: 'Change break frequency',
+      });
+    }
   };
   const onChosen3 = () => {
     firestore()
@@ -57,9 +63,13 @@ const ChoosePetScreen = () => {
       .then(() => {
         console.log('Pet updated!');
       });
-    navigation.navigate('Drawer', {
-      screen: 'Change break frequency',
-    });
+    if (fromShop === 'true') {
+      navigation.navigate('Drawer', {screen: 'Home'});
+    } else {
+      navigation.navigate('Drawer', {
+        screen: 'Change break frequency',
+      });
+    }
   };
 
   return (
@@ -122,7 +132,6 @@ const styles = StyleSheet.create({
   root: {
     flex: 1,
     alignItems: 'center',
-    //justifyContent: 'center',
     padding: 50,
     backgroundColor: '#FCF6E2',
   },

@@ -3,19 +3,14 @@ import {
   View,
   Text,
   StyleSheet,
-  Input,
   ImageBackground,
   Image,
   useWindowDimensions,
 } from 'react-native';
-import {createDrawerNavigator} from '@react-navigation/drawer';
-import {useRoute} from '@react-navigation/native';
-import CustomButton from '../Components/CustomButton';
+
 import {Button} from 'react-native-elements';
-import {NavigationContainer, useNavigation} from '@react-navigation/native';
+import {useNavigation} from '@react-navigation/native';
 import MainBackground from '../assets/MainBackground.png';
-import ChooseInterval from './ChooseInterval';
-import LoginScreen from './LoginScreen';
 
 import Casper from '../assets/Casper.png'; //standard
 import CasperBHome from '../assets/CasperBHome.png'; //basic
@@ -23,31 +18,26 @@ import CasperRHome from '../assets/CasperRHome.png'; //Rare
 import CasperPHome from '../assets/CasperPHome.png'; //Prestige
 
 import Camo from '../assets/Camo.png'; //standard
-import CamoBHome from '../assets/CamoBHome.png';
-import CamoRHome from '../assets/CamoRHome.png';
-import CamoPHome from '../assets/CamoPHome.png';
+import CamoBHome from '../assets/CamoBHome.png'; //basic
+import CamoRHome from '../assets/CamoRHome.png'; //rare
+import CamoPHome from '../assets/CamoPHome.png'; //prestige
 
-import Cuincy from '../assets/Cuincy.png';
-import CuincyBHome from '../assets/CuincyBHome.png';
-import CuincyRHome from '../assets/CuincyRHome.png';
-import CuincyPHome from '../assets/CuincyPHome.png';
+import Cuincy from '../assets/Cuincy.png'; //standard
+import CuincyBHome from '../assets/CuincyBHome.png'; //basic
+import CuincyRHome from '../assets/CuincyRHome.png'; //rare
+import CuincyPHome from '../assets/CuincyPHome.png'; //prestige
 
 import {firebase} from '@react-native-firebase/auth';
 import firestore from '@react-native-firebase/firestore';
-import {set} from 'react-native-reanimated';
-//import BackgroundTimer from 'react-native-background-timer';
+
 const HomeScreen = () => {
   const navigation = useNavigation();
   const {height} = useWindowDimensions();
   const [source, setSource] = useState();
   const [coins, setCoins] = useState();
   let user = firebase.auth().currentUser;
-  //const route = useRoute();
-  //const {userID} = route.params;
   const onStartBreakPressed = () => {
-    //console.warn("Register");
     navigation.navigate('ChooseBreakActivity');
-    //BackgroundTimer.start();
   };
   useEffect(() => {
     const fieldPath = new firebase.firestore.FieldPath('chillCoins');
@@ -113,8 +103,6 @@ const HomeScreen = () => {
     return () => subscriber();
   });
 
-  //text="It is time for a break!"
-  //onPress={onStartBreakPressed}
   return (
     <View style={styles.root}>
       <ImageBackground
@@ -157,12 +145,6 @@ const HomeScreen = () => {
           <Button
             title="Time for a Break!"
             onPress={onStartBreakPressed}
-            //icon={{
-            //  name: 'hourglass-start',
-            //  type: 'font-awesome',
-            //  size: 15,
-            // color: 'white',
-            // }}
             iconContainerStyle={{marginRight: 10}}
             titleStyle={{fontWeight: '900'}}
             buttonStyle={{
@@ -192,8 +174,6 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    //padding: 50,
-    //backgroundColor: '#FCF6E2',
   },
   bottom: {
     flex: 1,

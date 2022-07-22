@@ -5,13 +5,10 @@ import {
   View,
   Image,
   useWindowDimensions,
-  StatusBar,
-  SafeAreaView,
   ScrollView,
   Alert,
 } from 'react-native';
 import {useNavigation} from '@react-navigation/native';
-import {useRoute} from '@react-navigation/native';
 import firestore from '@react-native-firebase/firestore';
 import CuincyB from '../assets/CuincyB.png';
 import CuincyP from '../assets/CuincyP.png';
@@ -24,7 +21,7 @@ import CamoP from '../assets/CamoP.png';
 import CamoR from '../assets/CamoR.png';
 import CustomButton from '../Components/CustomButton';
 import {firebase} from '@react-native-firebase/auth';
-import {Button} from 'react-native-elements';
+
 const ShopScreen = () => {
   const navigation = useNavigation();
   const {height} = useWindowDimensions();
@@ -80,8 +77,6 @@ const ShopScreen = () => {
         const pet = documentSnapshot.get(fieldPath);
         console.log(pet);
 
-        //const User = await firestore().collection('users').doc(user.uid).get();
-        //console.log(User);
         if (
           pet === 'Cuincy' ||
           pet === 'CuincyB' ||
@@ -105,7 +100,6 @@ const ShopScreen = () => {
           pet === 'CamoR'
         ) {
           getCamoURL();
-          //console.log(source);
         }
       });
     return () => subscriber();
@@ -138,8 +132,6 @@ const ShopScreen = () => {
         .then(() => {
           console.log('New skin updated!');
           navigation.navigate('Home');
-          //const user = firestore().collection('users').doc(userID).get();
-          //console.log(user);
         });
     }
     console.log('B ran');
@@ -169,8 +161,6 @@ const ShopScreen = () => {
         .update({petimage: 'CamoR'})
         .then(() => {
           console.log('New skin updated!');
-          //const user = firestore().collection('users').doc(userID).get();
-          //console.log(user);
         });
     }
     console.log('R ran');
@@ -200,8 +190,6 @@ const ShopScreen = () => {
         .update({petimage: 'CamoP'})
         .then(() => {
           console.log('New skin updated!');
-          //const user = firestore().collection('users').doc(userID).get();
-          //console.log(user);
         });
     }
     console.log('P ran');
@@ -259,7 +247,7 @@ const ShopScreen = () => {
     setRedeemedR(false);
   }, [source1]);
   return (
-    <ScrollView>
+    <ScrollView contentContainerStyle={{flex: 1}}>
       <View style={styles.root}>
         <Text style={styles.title}>💰ChillCoins: {coins}💰</Text>
         {source1 && (
