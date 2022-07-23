@@ -211,8 +211,8 @@ const ShopScreen = () => {
   };
 
   const manageCoinsB = source => {
-    if (coins >= 1) {
-      deductCoins(1);
+    if (coins >= 100) {
+      deductCoins(100);
       updateSkinB(source);
       setRedeemedB(true);
     } else {
@@ -221,8 +221,8 @@ const ShopScreen = () => {
     }
   };
   const manageCoinsR = source => {
-    if (coins >= 2) {
-      deductCoins(2);
+    if (coins >= 500) {
+      deductCoins(500);
       updateSkinR(source);
       setRedeemedR(true);
     } else {
@@ -232,8 +232,8 @@ const ShopScreen = () => {
   };
 
   const manageCoinsP = source => {
-    if (coins >= 3) {
-      deductCoins(3);
+    if (coins >= 1500) {
+      deductCoins(1500);
       updateSkinP(source);
       setRedeemedP(true);
     } else {
