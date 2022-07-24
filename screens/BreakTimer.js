@@ -6,14 +6,7 @@ import CustomInput from '../Components/CustomInput';
 import firestore from '@react-native-firebase/firestore';
 import {firebase} from '@react-native-firebase/auth';
 const BreakTimer = () => {
-<<<<<<< HEAD
-  const [secondsLeft, setSecondsLeft] = useState(30);
-=======
-  const onselected = () => {
-    console.warn('Go to Music Page');
-  };
-  const [secondsLeft, setSecondsLeft] = useState(3);
->>>>>>> master
+  const [secondsLeft, setSecondsLeft] = useState(600);
   const [secondsRemaining, setSecondsRemaining] = useState();
   const [timerOn, setTimerOn] = useState(false);
   let user = firebase.auth().currentUser;

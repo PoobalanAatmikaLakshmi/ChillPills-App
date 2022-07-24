@@ -1,10 +1,5 @@
-<<<<<<< HEAD
 import React, {useState} from 'react';
 import {View, Text, StyleSheet} from 'react-native';
-=======
-import React, {useState, useEffect, useRoute} from 'react';
-import {View, Text, Button, StyleSheet, Input, Alert} from 'react-native';
->>>>>>> master
 import CustomInput from '../Components/CustomInput';
 import CustomButton from '../Components/CustomButton';
 import {useNavigation} from '@react-navigation/native';
@@ -22,7 +17,6 @@ const SignUpScreen = () => {
   const navigation = useNavigation();
 
   const onRegisterPressed = async () => {
-<<<<<<< HEAD
     await firebase
       .auth()
       .createUserWithEmailAndPassword(email, password)
@@ -49,40 +43,6 @@ const SignUpScreen = () => {
       .catch(error => {
         alert(error);
       });
-=======
-    //console.warn("Register");
-    //will work
-    if (password === passwordRepeat) {
-      await firebase
-        .auth()
-        .createUserWithEmailAndPassword(email, password)
-        .then(response => {
-          const uid = response.user.uid;
-          const data = {
-            id: uid,
-            email,
-            fullName,
-            petimage: 'uninitialized',
-            chillCoins: 0,
-          };
-          const usersRef = firestore().collection('users');
-          usersRef
-            .doc(uid)
-            .set(data)
-            .then(() => {
-              navigation.navigate('Login');
-            })
-            .catch(error => {
-              alert(error);
-            });
-        })
-        .catch(error => {
-          alert(error);
-        });
-    } else {
-      buttonAlert();
-    }
->>>>>>> master
   };
   const onLoginPressed = () => {
     navigation.navigate('Login');

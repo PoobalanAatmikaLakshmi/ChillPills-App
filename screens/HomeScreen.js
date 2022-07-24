@@ -193,7 +193,7 @@ const styles = StyleSheet.create({
     fontStyle: 'italic',
   },
   title: {
-    fontSize: 22,
+    fontSize: 23,
     fontFamily: 'Futura',
   },
 });
