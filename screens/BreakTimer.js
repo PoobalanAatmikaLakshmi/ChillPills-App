@@ -6,7 +6,14 @@ import CustomInput from '../Components/CustomInput';
 import firestore from '@react-native-firebase/firestore';
 import {firebase} from '@react-native-firebase/auth';
 const BreakTimer = () => {
+<<<<<<< HEAD
   const [secondsLeft, setSecondsLeft] = useState(30);
+=======
+  const onselected = () => {
+    console.warn('Go to Music Page');
+  };
+  const [secondsLeft, setSecondsLeft] = useState(3);
+>>>>>>> master
   const [secondsRemaining, setSecondsRemaining] = useState();
   const [timerOn, setTimerOn] = useState(false);
   let user = firebase.auth().currentUser;
@@ -67,7 +74,7 @@ const BreakTimer = () => {
   const handleInput = text => {
     const currValue = parseInt(text, 10);
     if (currValue < 600) {
-      setSecondsLeft(30);
+      setSecondsLeft(3);
     } else if (currValue > 1800) {
       setSecondsLeft(1800);
     } else if (isNaN(currValue)) {

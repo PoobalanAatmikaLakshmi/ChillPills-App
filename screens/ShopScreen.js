@@ -6,6 +6,7 @@ import {
   Image,
   useWindowDimensions,
   ScrollView,
+  Alert,
 } from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import firestore from '@react-native-firebase/firestore';
@@ -28,6 +29,7 @@ const ShopScreen = () => {
   //const route = useRoute();
   //const {userID} = route.params;
   //const userid = route.initialParams.id;
+  const [coins, setCoins] = useState();
   const [source1, setSource1] = useState();
   const [source2, setSource2] = useState();
   const [source3, setSource3] = useState();
@@ -46,7 +48,21 @@ const ShopScreen = () => {
     setSource2(CamoR);
     setSource3(CamoP);
   };
+  useEffect(() => {
+    const fieldPath = new firebase.firestore.FieldPath('chillCoins');
+    const using = firestore()
+      .collection('users')
+      .doc(user.uid)
+      .onSnapshot(documentSnapshot => {
+        console.log('User data: ', documentSnapshot.data());
+        const count = documentSnapshot.get(fieldPath);
+        console.log(count);
+        setCoins(count);
+      });
 
+    // Stop listening for updates when no longer required
+    return () => using();
+  });
   useEffect(() => {
     const fieldPath = new firebase.firestore.FieldPath('petimage');
     const subscriber = firestore()
@@ -174,6 +190,50 @@ const ShopScreen = () => {
     }
     console.log('P ran');
   };
+  const buttonAlert = () =>
+    Alert.alert(
+      'Warning',
+      'Insufficient ChillCoins! Develop a more consistent break routine to earn more!',
+      [{text: 'Ok', onPress: () => console.log('OK Pressed')}],
+    );
+  const deductCoins = async number => {
+    await firestore()
+      .collection('users')
+      .doc(user.uid)
+      .update({
+        chillCoins: firebase.firestore.FieldValue.increment(-1 * number),
+      });
+    console.log('deducted coins');
+  };
+
+  const manageCoinsB = source => {
+    if (coins >= 1) {
+      deductCoins(1);
+      updateSkinB(source);
+    } else {
+      buttonAlert();
+      //console.alert('insufficient chillcoins');
+    }
+  };
+  const manageCoinsR = source => {
+    if (coins >= 2) {
+      deductCoins(2);
+      updateSkinR(source);
+    } else {
+      buttonAlert();
+      //console.alert('insufficient chillcoins');
+    }
+  };
+
+  const manageCoinsP = source => {
+    if (coins >= 3) {
+      deductCoins(3);
+      updateSkinP(source);
+    } else {
+      buttonAlert();
+      //console.alert('insufficient chillcoins');
+    }
+  };
   return (
     <ScrollView contentContainerStyle={{flex: 1}}>
       <View style={styles.root}>
@@ -187,7 +247,7 @@ const ShopScreen = () => {
         <Text style={styles.description}>🪙 Budget 🪙</Text>
         <CustomButton
           text="100 ChillCoins"
-          onPress={() => updateSkinB(source1)}
+          onPress={() => manageCoinsB(source1)}
         />
         {source2 && (
           <Image
@@ -199,7 +259,7 @@ const ShopScreen = () => {
         <Text style={styles.description}>💵 Rare 💵</Text>
         <CustomButton
           text="500 ChillCoins"
-          onPress={() => updateSkinR(source2)}
+          onPress={() => manageCoinsR(source2)}
         />
         {source3 && (
           <Image
@@ -211,7 +271,7 @@ const ShopScreen = () => {
         <Text style={styles.description}>💎 Prestige 💎</Text>
         <CustomButton
           text="1500 Chillcoins"
-          onPress={() => updateSkinP(source3)}
+          onPress={() => manageCoinsP(source3)}
         />
       </View>
     </ScrollView>
