@@ -17,3 +17,5 @@ Git
 - Run pod update 
 2) download xcode and iphone simulator (xcode preferences --> components)
 3) run npx react-native run-ios
+
+Here is the link to our project's README, which contains all the features and documentation: https://docs.google.com/document/d/1nIkSS0CWJmUEac3qgL4dinfBj38zUZ25ltajOuDKkec/edit?usp=sharing
